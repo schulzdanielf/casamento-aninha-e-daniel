@@ -1,22 +1,23 @@
 /* =========================================================
-   Site do Casamento — Aninha & Daniel
-   Estilo: Romântico Rústico (terracota, bege, marsala)
+   Site do Casamento — Ana Carolina & Daniel
+   Estilo: Clean & Minimalista, com tons terrosos e verde-oliva
+   Inspirado na identidade visual dos convites/materiais do casal
    ========================================================= */
 
 :root {
-  --cor-bege: #faf3ea;
-  --cor-bege-escuro: #efe1cd;
-  --cor-marsala: #7c3f3f;
-  --cor-marsala-escuro: #5c2c2c;
-  --cor-terracota: #c9784b;
-  --cor-dourado: #b08d57;
-  --cor-texto: #3d2b1f;
-  --cor-texto-claro: #6b5a4d;
-  --cor-branco: #fffdfa;
-  --sombra: 0 8px 24px rgba(92, 44, 44, 0.12);
-  --raio: 16px;
-  --fonte-titulo: "Playfair Display", serif;
-  --fonte-corpo: "Poppins", sans-serif;
+  --cor-bg: #faf8f4;
+  --cor-bg-alt: #f2efe5;
+  --cor-linha: #e2dcc8;
+  --cor-texto: #37352c;
+  --cor-texto-claro: #8a8474;
+  --cor-verde: #7d8a68;
+  --cor-verde-escuro: #5f6b4c;
+  --cor-terracota: #b98a63;
+  --cor-branco: #ffffff;
+  --raio: 2px;
+  --fonte-serif: "Cormorant Garamond", serif;
+  --fonte-sans: "Jost", sans-serif;
+  --fonte-script: "Petit Formal Script", cursive;
 }
 
 * {
@@ -30,16 +31,18 @@ html {
 }
 
 body {
-  font-family: var(--fonte-corpo);
-  background: var(--cor-bege);
+  font-family: var(--fonte-sans);
+  font-weight: 300;
+  background: var(--cor-bg);
   color: var(--cor-texto);
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--fonte-titulo);
-  color: var(--cor-marsala-escuro);
-  font-weight: 700;
+  font-family: var(--fonte-serif);
+  color: var(--cor-texto);
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 a {
@@ -54,7 +57,7 @@ img {
 
 .container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -64,25 +67,29 @@ img {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(250, 243, 234, 0.95);
+  background: rgba(250, 248, 244, 0.96);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--cor-bege-escuro);
+  border-bottom: 1px solid var(--cor-linha);
 }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.9rem 1.5rem;
-  max-width: 1100px;
+  padding: 1.1rem 1.5rem;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
 .nav-logo {
-  font-family: var(--fonte-titulo);
-  font-size: 1.4rem;
-  color: var(--cor-marsala);
-  letter-spacing: 0.5px;
+  font-family: var(--fonte-serif);
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cor-texto);
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-toggle {
@@ -96,33 +103,35 @@ img {
 }
 
 .nav-toggle span {
-  width: 26px;
-  height: 2px;
-  background: var(--cor-marsala);
-  border-radius: 2px;
+  width: 24px;
+  height: 1px;
+  background: var(--cor-texto);
 }
 
 .nav-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 1.4rem;
+  gap: 0.5rem 1.6rem;
   list-style: none;
 }
 
 .nav-links a {
-  font-size: 0.92rem;
+  font-family: var(--fonte-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
   font-weight: 500;
-  color: var(--cor-texto);
-  padding: 0.4rem 0.2rem;
-  border-bottom: 2px solid transparent;
+  color: var(--cor-texto-claro);
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid transparent;
   transition: color 0.2s, border-color 0.2s;
   white-space: nowrap;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--cor-marsala);
-  border-color: var(--cor-terracota);
+  color: var(--cor-verde-escuro);
+  border-color: var(--cor-verde);
 }
 
 @media (max-width: 860px) {
@@ -137,12 +146,12 @@ img {
     right: 0;
     background: var(--cor-branco);
     flex-direction: column;
-    padding: 1rem 1.5rem;
-    gap: 0.8rem;
+    padding: 1.2rem 1.5rem;
+    gap: 0.9rem;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
-    border-bottom: 1px solid var(--cor-bege-escuro);
+    border-bottom: 1px solid var(--cor-linha);
   }
 
   .nav-links.open {
@@ -153,52 +162,71 @@ img {
 /* ---------- Hero ---------- */
 .hero {
   text-align: center;
-  padding: 4.5rem 1.5rem 3.5rem;
-  background: linear-gradient(180deg, var(--cor-bege) 0%, var(--cor-bege-escuro) 100%);
+  padding: 5.5rem 1.5rem 4rem;
+  background: var(--cor-bg);
 }
 
 .hero-eyebrow {
   text-transform: uppercase;
   letter-spacing: 3px;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   color: var(--cor-terracota);
-  font-weight: 600;
+  font-weight: 500;
+  margin-bottom: 1.1rem;
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  margin: 0.6rem 0 0.8rem;
+  font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: 0 0 0.8rem;
+}
+
+.hero-amp {
+  font-family: var(--fonte-script);
+  font-size: 0.75em;
+  color: var(--cor-verde-escuro);
+  padding: 0 0.1em;
+}
+
+.hero-script {
+  font-family: var(--fonte-script);
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  color: var(--cor-verde-escuro);
+  font-weight: 400;
+  margin: 0.4rem 0 1.6rem;
 }
 
 .hero p.data-local {
-  font-size: 1.1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
   color: var(--cor-texto-claro);
-  margin-bottom: 2rem;
+  margin-bottom: 2.4rem;
 }
 
 .hero .divider {
-  width: 60px;
-  height: 3px;
+  width: 44px;
+  height: 1px;
   background: var(--cor-terracota);
-  margin: 1.2rem auto;
-  border-radius: 3px;
+  margin: 1.6rem auto;
 }
 
 /* ---------- Countdown ---------- */
 .countdown {
   display: flex;
   justify-content: center;
-  gap: 1rem;
   flex-wrap: wrap;
   margin: 2rem auto;
 }
 
 .countdown-item {
-  background: var(--cor-branco);
-  border-radius: var(--raio);
-  box-shadow: var(--sombra);
-  padding: 1rem 1.4rem;
-  min-width: 90px;
+  padding: 0 1.5rem;
+  border-right: 1px solid var(--cor-linha);
+}
+
+.countdown-item:last-child {
+  border-right: none;
 }
 
 .countdown-item span {
@@ -206,83 +234,112 @@ img {
 }
 
 .countdown-number {
-  font-family: var(--fonte-titulo);
-  font-size: 2rem;
-  color: var(--cor-marsala);
-  font-weight: 700;
+  font-family: var(--fonte-serif);
+  font-size: 2.1rem;
+  color: var(--cor-texto);
+  font-weight: 500;
 }
 
 .countdown-label {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   color: var(--cor-texto-claro);
 }
 
 /* ---------- Botões ---------- */
 .btn {
   display: inline-block;
-  padding: 0.85rem 1.8rem;
+  padding: 0.9rem 2.3rem;
   border-radius: 999px;
-  background: var(--cor-marsala);
-  color: var(--cor-branco) !important;
-  font-weight: 600;
-  transition: transform 0.2s, background 0.2s;
-  border: none;
+  background: transparent;
+  border: 1px solid var(--cor-texto);
+  color: var(--cor-texto) !important;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
   cursor: pointer;
-  font-family: var(--fonte-corpo);
-  font-size: 0.95rem;
+  font-family: var(--fonte-sans);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .btn:hover {
-  background: var(--cor-marsala-escuro);
-  transform: translateY(-2px);
+  background: var(--cor-texto);
+  color: var(--cor-branco) !important;
 }
 
 .btn-outline {
-  background: transparent;
-  border: 2px solid var(--cor-marsala);
-  color: var(--cor-marsala) !important;
+  border-color: var(--cor-verde);
+  color: var(--cor-verde-escuro) !important;
 }
 
 .btn-outline:hover {
-  background: var(--cor-marsala);
+  background: var(--cor-verde);
   color: var(--cor-branco) !important;
+  border-color: var(--cor-verde);
 }
 
 /* ---------- Seções genéricas ---------- */
 .section {
-  padding: 4rem 0;
+  padding: 5rem 0;
 }
 
 .section-title {
   text-align: center;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.9rem;
   font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 500;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 1px;
+  background: var(--cor-terracota);
+  margin: 1rem auto 0;
 }
 
 .section-subtitle {
   text-align: center;
   color: var(--cor-texto-claro);
   max-width: 600px;
-  margin: 0 auto 2.8rem;
+  margin: 0 auto 3rem;
+  font-size: 0.95rem;
 }
 
 .section-alt {
-  background: var(--cor-bege-escuro);
+  background: var(--cor-bg-alt);
 }
 
 /* ---------- Cards genéricos ---------- */
 .card {
-  background: var(--cor-branco);
+  background: transparent;
+  border: 1px solid var(--cor-linha);
   border-radius: var(--raio);
-  box-shadow: var(--sombra);
-  padding: 1.6rem;
+  padding: 1.8rem 1.6rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  border-color: var(--cor-verde);
+  transform: translateY(-2px);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: var(--cor-texto-claro);
+  font-size: 0.9rem;
 }
 
 .grid {
   display: grid;
-  gap: 1.6rem;
+  gap: 1.4rem;
 }
 
 .grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
@@ -291,52 +348,61 @@ img {
 /* ---------- Cronograma ---------- */
 .timeline {
   position: relative;
-  max-width: 700px;
+  max-width: 680px;
   margin: 0 auto;
-  padding-left: 2.2rem;
-  border-left: 3px solid var(--cor-terracota);
+  padding-left: 2.3rem;
+  border-left: 1px solid var(--cor-linha);
 }
 
 .timeline-item {
   position: relative;
-  padding-bottom: 2.2rem;
+  padding-bottom: 2.3rem;
 }
 
 .timeline-item::before {
   content: "";
   position: absolute;
-  left: -2.55rem;
-  top: 0.15rem;
-  width: 16px;
-  height: 16px;
+  left: -2.42rem;
+  top: 0.3rem;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: var(--cor-marsala);
-  border: 3px solid var(--cor-bege);
+  background: var(--cor-bg);
+  border: 1px solid var(--cor-verde-escuro);
 }
 
 .timeline-time {
-  font-weight: 700;
-  color: var(--cor-marsala);
-  font-family: var(--fonte-titulo);
-  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--cor-verde-escuro);
+  font-family: var(--fonte-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
 }
 
 .timeline-title {
+  font-family: var(--fonte-sans);
   font-weight: 600;
-  margin: 0.2rem 0 0.2rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1.2px;
+  margin: 0.35rem 0 0.35rem;
 }
 
 .timeline-desc {
   color: var(--cor-texto-claro);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 /* ---------- Cardápio / Drinks ---------- */
 .menu-category h3 {
-  border-bottom: 2px solid var(--cor-terracota);
-  display: inline-block;
-  padding-bottom: 0.3rem;
-  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--cor-linha);
+  padding-bottom: 0.7rem;
+  margin-bottom: 1.2rem;
+  color: var(--cor-verde-escuro);
 }
 
 .menu-item {
@@ -344,7 +410,7 @@ img {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.7rem 0;
-  border-bottom: 1px dashed var(--cor-bege-escuro);
+  border-bottom: 1px dotted var(--cor-linha);
 }
 
 .menu-item:last-child {
@@ -352,27 +418,53 @@ img {
 }
 
 .menu-item-name {
-  font-weight: 600;
+  font-weight: 500;
+  color: var(--cor-texto);
+  font-size: 0.95rem;
 }
 
 .menu-item-desc {
   color: var(--cor-texto-claro);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
 }
 
 .tag {
   display: inline-block;
-  font-size: 0.7rem;
-  background: var(--cor-terracota);
-  color: var(--cor-branco);
-  padding: 0.15rem 0.55rem;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid var(--cor-terracota);
+  color: var(--cor-terracota);
+  padding: 0.12rem 0.5rem;
   border-radius: 999px;
   margin-left: 0.4rem;
   vertical-align: middle;
 }
 
 .tag-veg {
-  background: #6a8f5b;
+  border-color: var(--cor-verde-escuro);
+  color: var(--cor-verde-escuro);
+}
+
+.drink-card {
+  text-align: center;
+}
+
+.drink-card .menu-item-name {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.drink-card .menu-item-desc {
+  font-size: 0.85rem;
+}
+
+.drink-tbd {
+  color: var(--cor-terracota);
+  font-style: italic;
 }
 
 /* ---------- Álbum colaborativo ---------- */
@@ -395,22 +487,25 @@ img {
   padding-left: 2.6rem;
   margin-bottom: 1.1rem;
   counter-increment: step;
+  font-size: 0.92rem;
+  color: var(--cor-texto-claro);
 }
 
 .album-steps li::before {
   content: counter(step);
   position: absolute;
   left: 0;
-  top: 0;
-  width: 1.9rem;
-  height: 1.9rem;
+  top: -0.15rem;
+  width: 1.8rem;
+  height: 1.8rem;
   border-radius: 50%;
-  background: var(--cor-marsala);
-  color: var(--cor-branco);
+  border: 1px solid var(--cor-texto);
+  color: var(--cor-texto);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
+  font-family: var(--fonte-serif);
+  font-weight: 500;
   font-size: 0.9rem;
 }
 
@@ -419,30 +514,43 @@ img {
   max-width: 560px;
   margin: 0 auto 3rem;
   display: grid;
-  gap: 1rem;
+  gap: 1.4rem;
 }
 
 .mural-form input,
 .mural-form textarea {
   width: 100%;
-  padding: 0.8rem 1rem;
-  border-radius: 10px;
-  border: 1px solid var(--cor-bege-escuro);
-  font-family: var(--fonte-corpo);
+  padding: 0.7rem 0.1rem;
+  border: none;
+  border-bottom: 1px solid var(--cor-linha);
+  border-radius: 0;
+  font-family: var(--fonte-sans);
   font-size: 0.95rem;
-  background: var(--cor-branco);
+  background: transparent;
+  color: var(--cor-texto);
+}
+
+.mural-form input::placeholder,
+.mural-form textarea::placeholder {
+  color: var(--cor-texto-claro);
+}
+
+.mural-form input:focus,
+.mural-form textarea:focus {
+  outline: none;
+  border-color: var(--cor-verde-escuro);
 }
 
 .mural-form textarea {
-  min-height: 110px;
+  min-height: 100px;
   resize: vertical;
 }
 
 .mural-status {
   text-align: center;
   min-height: 1.2rem;
-  color: var(--cor-marsala);
-  font-size: 0.9rem;
+  color: var(--cor-verde-escuro);
+  font-size: 0.85rem;
 }
 
 .mural-list {
@@ -452,22 +560,26 @@ img {
 }
 
 .mural-card {
-  background: var(--cor-branco);
+  background: transparent;
+  border: 1px solid var(--cor-linha);
+  border-top: 2px solid var(--cor-terracota);
   border-radius: var(--raio);
-  box-shadow: var(--sombra);
   padding: 1.3rem;
-  border-top: 4px solid var(--cor-terracota);
 }
 
 .mural-message {
+  font-family: var(--fonte-serif);
   font-style: italic;
-  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
+  margin-bottom: 0.7rem;
 }
 
 .mural-author {
-  font-weight: 600;
-  color: var(--cor-marsala);
-  font-size: 0.9rem;
+  font-family: var(--fonte-sans);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cor-verde-escuro);
+  font-size: 0.7rem;
 }
 
 .mural-empty {
@@ -479,36 +591,37 @@ img {
 /* ---------- Jornal dos Solteiros ---------- */
 .jornal-header {
   text-align: center;
-  border-top: 4px double var(--cor-marsala);
-  border-bottom: 4px double var(--cor-marsala);
-  padding: 1.4rem 0;
-  margin-bottom: 2.5rem;
+  border-top: 1px solid var(--cor-texto);
+  border-bottom: 1px solid var(--cor-texto);
+  padding: 1.6rem 0;
+  margin-bottom: 2.8rem;
 }
 
 .jornal-header h1 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  letter-spacing: 1px;
 }
 
 .jornal-header .edicao {
-  font-size: 0.85rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   color: var(--cor-texto-claro);
 }
 
 .solteiro-card {
-  background: var(--cor-branco);
-  border: 1px solid var(--cor-bege-escuro);
+  background: transparent;
+  border: 1px solid var(--cor-linha);
   border-radius: var(--raio);
   overflow: hidden;
-  box-shadow: var(--sombra);
 }
 
 .solteiro-foto {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  background: var(--cor-bege-escuro);
+  background: var(--cor-bg-alt);
+  filter: grayscale(10%);
 }
 
 .solteiro-info {
@@ -516,29 +629,30 @@ img {
 }
 
 .solteiro-nome {
-  font-family: var(--fonte-titulo);
-  font-size: 1.3rem;
-  margin-bottom: 0.2rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.3rem;
 }
 
 .solteiro-manchete {
-  font-weight: 700;
+  font-family: var(--fonte-sans);
+  font-weight: 500;
   color: var(--cor-terracota);
-  font-size: 0.85rem;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .solteiro-desc {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   color: var(--cor-texto-claro);
 }
 
 /* ---------- Mapa da festa ---------- */
 .mapa-embed {
+  border: 1px solid var(--cor-linha);
   border-radius: var(--raio);
   overflow: hidden;
-  box-shadow: var(--sombra);
 }
 
 .mapa-embed iframe {
@@ -549,27 +663,28 @@ img {
 
 .planta-baixa {
   max-width: 800px;
-  margin: 2.5rem auto 0;
+  margin: 2.8rem auto 0;
   text-align: center;
 }
 
 .planta-baixa img {
+  border: 1px solid var(--cor-linha);
   border-radius: var(--raio);
-  box-shadow: var(--sombra);
 }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  background: var(--cor-marsala-escuro);
-  color: var(--cor-bege);
+  background: var(--cor-bg-alt);
+  border-top: 1px solid var(--cor-linha);
+  color: var(--cor-texto-claro);
   text-align: center;
-  padding: 2.2rem 1.5rem;
+  padding: 2.4rem 1.5rem;
   margin-top: 3rem;
 }
 
 .site-footer p {
-  font-size: 0.9rem;
-  opacity: 0.85;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
 }
 
 .site-footer .heart {
