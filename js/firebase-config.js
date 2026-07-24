@@ -13,10 +13,11 @@
 // =====================================================================
 
 export const firebaseConfig = {
-  apiKey: "SUA_API_KEY_AQUI",
-  authDomain: "SEU_PROJETO.firebaseapp.com",
-  projectId: "SEU_PROJETO",
-  storageBucket: "SEU_PROJETO.appspot.com",
-  messagingSenderId: "SEU_SENDER_ID",
-  appId: "SEU_APP_ID",
+  apiKey: "AIzaSyB3viptrVUKoZQxZT1jE7sQ0sFK6_Had6M",
+  authDomain: "casamento-aninha-daniel.firebaseapp.com",
+  projectId: "casamento-aninha-daniel",
+  storageBucket: "casamento-aninha-daniel.firebasestorage.app",
+  messagingSenderId: "550008054158",
+  appId: "1:550008054158:web:4d45ce36f1a35913bec4df",
+  measurementId: "G-S3CZSMGJYZ",
 };
