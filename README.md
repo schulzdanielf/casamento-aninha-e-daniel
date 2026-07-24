@@ -23,6 +23,18 @@ js/mural.js        → Lógica do mural de recados
 
 - **Nomes, data e local**: já preenchidos com "Aninha & Daniel, 08/08/2026, Lago Norte, Brasília" em todas as páginas e no [js/main.js](js/main.js) (variável `dataCasamento`).
 - **Cardápio e drinks**: edite os itens diretamente em [cardapio.html](cardapio.html) e [drinks.html](drinks.html).
+- **Fotos dos drinks**: salve as fotos na pasta `assets/drinks/` com exatamente estes nomes (formato quadrado, ex. 800x800px, funciona melhor):
+  - `aperol-spritz.jpg`
+  - `gin-tonica.jpg`
+  - `fitzgerald.jpg`
+  - `moscow-mule.jpg`
+  - `drink-05-amora.jpg`
+  - `drink-06-alecrim.jpg`
+  - `drink-07-limao.jpg`
+  - `drink-08-mojito.jpg`
+  - `drink-09-laranja.jpg`
+
+  Enquanto a foto não existe, o card mostra um quadro vazio (sem quebrar o layout). Assim que o arquivo com o nome certo for adicionado na pasta, a foto aparece automaticamente.
 - **Álbum colaborativo**: crie um álbum compartilhado no Google Fotos (app ou site → Álbuns → Criar álbum → Compartilhar → Criar link) e cole o link em [album.html](album.html) no lugar de `SUBSTITUA_PELO_LINK_DO_SEU_ALBUM`.
 - **Jornal dos Solteiros**: troque as fotos (`https://via.placeholder.com/...`) e os textos em [solteiros.html](solteiros.html) pelos convidados reais.
 - **Mapa da festa**: troque o endereço do iframe em [mapa.html](mapa.html) pelo endereço exato do salão (Google Maps → Compartilhar → Incorporar um mapa → copiar o `src` do iframe) e troque a imagem de planta baixa por uma real, se tiver.
