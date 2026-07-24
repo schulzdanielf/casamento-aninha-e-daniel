@@ -212,41 +212,6 @@ img {
   margin: 1.6rem auto;
 }
 
-/* ---------- Countdown ---------- */
-.countdown {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 2rem auto;
-}
-
-.countdown-item {
-  padding: 0 1.5rem;
-  border-right: 1px solid var(--cor-linha);
-}
-
-.countdown-item:last-child {
-  border-right: none;
-}
-
-.countdown-item span {
-  display: block;
-}
-
-.countdown-number {
-  font-family: var(--fonte-serif);
-  font-size: 2.1rem;
-  color: var(--cor-texto);
-  font-weight: 500;
-}
-
-.countdown-label {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--cor-texto-claro);
-}
-
 /* ---------- Botões ---------- */
 .btn {
   display: inline-block;
@@ -320,6 +285,7 @@ img {
   border-radius: var(--raio);
   padding: 1.8rem 1.6rem;
   transition: border-color 0.2s, transform 0.2s;
+  min-width: 0;
 }
 
 .card:hover {
@@ -340,10 +306,17 @@ img {
 .grid {
   display: grid;
   gap: 1.4rem;
+  grid-template-columns: 1fr;
 }
 
-.grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+@media (min-width: 640px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
 
 /* ---------- Cronograma ---------- */
 .timeline {
@@ -406,9 +379,6 @@ img {
 }
 
 .menu-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
   padding: 0.7rem 0;
   border-bottom: 1px dotted var(--cor-linha);
 }
@@ -421,11 +391,15 @@ img {
   font-weight: 500;
   color: var(--cor-texto);
   font-size: 0.95rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .menu-item-desc {
   color: var(--cor-texto-claro);
   font-size: 0.82rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .tag {
