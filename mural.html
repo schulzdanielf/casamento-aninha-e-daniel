@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mural de Recados | Aninha &amp; Daniel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">A &amp; D</a>
+      <button class="nav-toggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="cronograma.html">Cronograma</a></li>
+        <li><a href="cardapio.html">Cardápio</a></li>
+        <li><a href="drinks.html">Drinks</a></li>
+        <li><a href="album.html">Álbum Colaborativo</a></li>
+        <li><a href="mural.html">Mural de Recados</a></li>
+        <li><a href="solteiros.html">Jornal dos Solteiros</a></li>
+        <li><a href="mapa.html">Mapa da Festa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 class="section-title">Mural de Recados</h1>
+        <p class="section-subtitle">Deixe uma mensagem, um conselho de casal ou um carinho para Aninha e Daniel. Todas as mensagens aparecem aqui em tempo real. 💌</p>
+
+        <form class="mural-form" id="mural-form">
+          <input type="text" name="nome" maxlength="60" placeholder="Seu nome (opcional)" />
+          <textarea name="mensagem" maxlength="500" placeholder="Escreva sua mensagem para o casal..." required></textarea>
+          <button type="submit" class="btn">Enviar mensagem</button>
+          <p class="mural-status" id="mural-status"></p>
+        </form>
+
+        <div class="mural-list" id="mural-list">
+          <p class="mural-empty">Carregando mensagens...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Com carinho, <span class="heart">♥</span> Aninha &amp; Daniel · <span data-ano-atual>2026</span></p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/mural.js"></script>
+</body>
+</html>

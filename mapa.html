@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa da Festa | Aninha &amp; Daniel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">A &amp; D</a>
+      <button class="nav-toggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="cronograma.html">Cronograma</a></li>
+        <li><a href="cardapio.html">Cardápio</a></li>
+        <li><a href="drinks.html">Drinks</a></li>
+        <li><a href="album.html">Álbum Colaborativo</a></li>
+        <li><a href="mural.html">Mural de Recados</a></li>
+        <li><a href="solteiros.html">Jornal dos Solteiros</a></li>
+        <li><a href="mapa.html">Mapa da Festa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 class="section-title">Mapa da Festa</h1>
+        <p class="section-subtitle">Nossa celebração acontece no Lago Norte, Brasília. Veja como chegar e a distribuição do espaço.</p>
+
+        <div class="mapa-embed">
+          <!--
+            IMPORTANTE: substitua o endereço abaixo pelo endereço exato do
+            local da festa (Google Maps > Compartilhar > Incorporar mapa).
+          -->
+          <iframe
+            src="https://www.google.com/maps?q=Lago+Norte,+Bras%C3%ADlia+-+DF&output=embed"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa do local da festa"
+          ></iframe>
+        </div>
+
+        <div class="planta-baixa">
+          <h3 style="text-align:center; margin-bottom:1rem;">Planta do salão</h3>
+          <!--
+            Substitua a imagem abaixo por uma planta baixa real do local
+            (ex.: recepção, mesas, pista de dança, bar, banheiros).
+          -->
+          <img src="https://via.placeholder.com/800x500?text=Planta+baixa+do+sal%C3%A3o" alt="Planta baixa do salão de festas" />
+        </div>
+
+        <p style="text-align:center; margin-top:2.5rem; color: var(--cor-texto-claro);">
+          Estacionamento disponível no local. Em caso de dúvidas sobre como chegar, fale com a organização da festa.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Com carinho, <span class="heart">♥</span> Aninha &amp; Daniel · <span data-ano-atual>2026</span></p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,577 @@
+/* =========================================================
+   Site do Casamento — Aninha & Daniel
+   Estilo: Romântico Rústico (terracota, bege, marsala)
+   ========================================================= */
+
+:root {
+  --cor-bege: #faf3ea;
+  --cor-bege-escuro: #efe1cd;
+  --cor-marsala: #7c3f3f;
+  --cor-marsala-escuro: #5c2c2c;
+  --cor-terracota: #c9784b;
+  --cor-dourado: #b08d57;
+  --cor-texto: #3d2b1f;
+  --cor-texto-claro: #6b5a4d;
+  --cor-branco: #fffdfa;
+  --sombra: 0 8px 24px rgba(92, 44, 44, 0.12);
+  --raio: 16px;
+  --fonte-titulo: "Playfair Display", serif;
+  --fonte-corpo: "Poppins", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  background: var(--cor-bege);
+  color: var(--cor-texto);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--fonte-titulo);
+  color: var(--cor-marsala-escuro);
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ---------- Header / Navegação ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 243, 234, 0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--cor-bege-escuro);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.nav-logo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.4rem;
+  color: var(--cor-marsala);
+  letter-spacing: 0.5px;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+.nav-toggle span {
+  width: 26px;
+  height: 2px;
+  background: var(--cor-marsala);
+  border-radius: 2px;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--cor-texto);
+  padding: 0.4rem 0.2rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--cor-marsala);
+  border-color: var(--cor-terracota);
+}
+
+@media (max-width: 860px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--cor-branco);
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    gap: 0.8rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-bottom: 1px solid var(--cor-bege-escuro);
+  }
+
+  .nav-links.open {
+    max-height: 500px;
+  }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  text-align: center;
+  padding: 4.5rem 1.5rem 3.5rem;
+  background: linear-gradient(180deg, var(--cor-bege) 0%, var(--cor-bege-escuro) 100%);
+}
+
+.hero-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+  color: var(--cor-terracota);
+  font-weight: 600;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  margin: 0.6rem 0 0.8rem;
+}
+
+.hero p.data-local {
+  font-size: 1.1rem;
+  color: var(--cor-texto-claro);
+  margin-bottom: 2rem;
+}
+
+.hero .divider {
+  width: 60px;
+  height: 3px;
+  background: var(--cor-terracota);
+  margin: 1.2rem auto;
+  border-radius: 3px;
+}
+
+/* ---------- Countdown ---------- */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+}
+
+.countdown-item {
+  background: var(--cor-branco);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 1rem 1.4rem;
+  min-width: 90px;
+}
+
+.countdown-item span {
+  display: block;
+}
+
+.countdown-number {
+  font-family: var(--fonte-titulo);
+  font-size: 2rem;
+  color: var(--cor-marsala);
+  font-weight: 700;
+}
+
+.countdown-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cor-texto-claro);
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  background: var(--cor-marsala);
+  color: var(--cor-branco) !important;
+  font-weight: 600;
+  transition: transform 0.2s, background 0.2s;
+  border: none;
+  cursor: pointer;
+  font-family: var(--fonte-corpo);
+  font-size: 0.95rem;
+}
+
+.btn:hover {
+  background: var(--cor-marsala-escuro);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--cor-marsala);
+  color: var(--cor-marsala) !important;
+}
+
+.btn-outline:hover {
+  background: var(--cor-marsala);
+  color: var(--cor-branco) !important;
+}
+
+/* ---------- Seções genéricas ---------- */
+.section {
+  padding: 4rem 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--cor-texto-claro);
+  max-width: 600px;
+  margin: 0 auto 2.8rem;
+}
+
+.section-alt {
+  background: var(--cor-bege-escuro);
+}
+
+/* ---------- Cards genéricos ---------- */
+.card {
+  background: var(--cor-branco);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 1.6rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.6rem;
+}
+
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+/* ---------- Cronograma ---------- */
+.timeline {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-left: 2.2rem;
+  border-left: 3px solid var(--cor-terracota);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2.2rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -2.55rem;
+  top: 0.15rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--cor-marsala);
+  border: 3px solid var(--cor-bege);
+}
+
+.timeline-time {
+  font-weight: 700;
+  color: var(--cor-marsala);
+  font-family: var(--fonte-titulo);
+  font-size: 1.2rem;
+}
+
+.timeline-title {
+  font-weight: 600;
+  margin: 0.2rem 0 0.2rem;
+}
+
+.timeline-desc {
+  color: var(--cor-texto-claro);
+  font-size: 0.95rem;
+}
+
+/* ---------- Cardápio / Drinks ---------- */
+.menu-category h3 {
+  border-bottom: 2px solid var(--cor-terracota);
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px dashed var(--cor-bege-escuro);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item-name {
+  font-weight: 600;
+}
+
+.menu-item-desc {
+  color: var(--cor-texto-claro);
+  font-size: 0.88rem;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  background: var(--cor-terracota);
+  color: var(--cor-branco);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+.tag-veg {
+  background: #6a8f5b;
+}
+
+/* ---------- Álbum colaborativo ---------- */
+.album-box {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.album-steps {
+  text-align: left;
+  max-width: 500px;
+  margin: 2rem auto 0;
+  counter-reset: step;
+  list-style: none;
+}
+
+.album-steps li {
+  position: relative;
+  padding-left: 2.6rem;
+  margin-bottom: 1.1rem;
+  counter-increment: step;
+}
+
+.album-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--cor-marsala);
+  color: var(--cor-branco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* ---------- Mural de mensagens ---------- */
+.mural-form {
+  max-width: 560px;
+  margin: 0 auto 3rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.mural-form input,
+.mural-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--cor-bege-escuro);
+  font-family: var(--fonte-corpo);
+  font-size: 0.95rem;
+  background: var(--cor-branco);
+}
+
+.mural-form textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.mural-status {
+  text-align: center;
+  min-height: 1.2rem;
+  color: var(--cor-marsala);
+  font-size: 0.9rem;
+}
+
+.mural-list {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.mural-card {
+  background: var(--cor-branco);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 1.3rem;
+  border-top: 4px solid var(--cor-terracota);
+}
+
+.mural-message {
+  font-style: italic;
+  margin-bottom: 0.6rem;
+}
+
+.mural-author {
+  font-weight: 600;
+  color: var(--cor-marsala);
+  font-size: 0.9rem;
+}
+
+.mural-empty {
+  text-align: center;
+  color: var(--cor-texto-claro);
+  grid-column: 1 / -1;
+}
+
+/* ---------- Jornal dos Solteiros ---------- */
+.jornal-header {
+  text-align: center;
+  border-top: 4px double var(--cor-marsala);
+  border-bottom: 4px double var(--cor-marsala);
+  padding: 1.4rem 0;
+  margin-bottom: 2.5rem;
+}
+
+.jornal-header h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.jornal-header .edicao {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--cor-texto-claro);
+}
+
+.solteiro-card {
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-bege-escuro);
+  border-radius: var(--raio);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+.solteiro-foto {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--cor-bege-escuro);
+}
+
+.solteiro-info {
+  padding: 1.2rem;
+}
+
+.solteiro-nome {
+  font-family: var(--fonte-titulo);
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+}
+
+.solteiro-manchete {
+  font-weight: 700;
+  color: var(--cor-terracota);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.solteiro-desc {
+  font-size: 0.92rem;
+  color: var(--cor-texto-claro);
+}
+
+/* ---------- Mapa da festa ---------- */
+.mapa-embed {
+  border-radius: var(--raio);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+.mapa-embed iframe {
+  width: 100%;
+  height: 420px;
+  border: 0;
+}
+
+.planta-baixa {
+  max-width: 800px;
+  margin: 2.5rem auto 0;
+  text-align: center;
+}
+
+.planta-baixa img {
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--cor-marsala-escuro);
+  color: var(--cor-bege);
+  text-align: center;
+  padding: 2.2rem 1.5rem;
+  margin-top: 3rem;
+}
+
+.site-footer p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.site-footer .heart {
+  color: var(--cor-terracota);
+}
