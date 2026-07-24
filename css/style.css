@@ -93,7 +93,7 @@ img {
 }
 
 .nav-toggle {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 5px;
   background: none;
@@ -109,10 +109,24 @@ img {
 }
 
 .nav-links {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--cor-branco);
+  flex-direction: column;
+  padding: 1.2rem 1.5rem;
+  gap: 0.9rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  border-bottom: 1px solid var(--cor-linha);
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.6rem;
   list-style: none;
+}
+
+.nav-links.open {
+  max-height: 500px;
 }
 
 .nav-links a {
@@ -132,31 +146,6 @@ img {
 .nav-links a.active {
   color: var(--cor-verde-escuro);
   border-color: var(--cor-verde);
-}
-
-@media (max-width: 860px) {
-  .nav-toggle {
-    display: flex;
-  }
-
-  .nav-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--cor-branco);
-    flex-direction: column;
-    padding: 1.2rem 1.5rem;
-    gap: 0.9rem;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    border-bottom: 1px solid var(--cor-linha);
-  }
-
-  .nav-links.open {
-    max-height: 500px;
-  }
 }
 
 /* ---------- Hero ---------- */
