@@ -638,6 +638,28 @@ img {
 .solteiro-desc {
   font-size: 0.88rem;
   color: var(--cor-texto-claro);
+  line-height: 1.6;
+}
+
+.solteiro-loc {
+  font-size: 0.75rem;
+  color: var(--cor-terracota);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.6rem;
+}
+
+.solteiro-tags {
+  margin-top: 0.9rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cor-verde-escuro);
+  border-top: 1px solid var(--cor-linha);
+  padding-top: 0.7rem;
+}
+
+.grid-3 .solteiro-card.reveal {
+  transition-delay: calc(var(--i, 0) * 60ms);
 }
 
 /* ---------- Mapa da festa ---------- */
