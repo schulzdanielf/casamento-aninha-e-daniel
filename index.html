@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ana Carolina &amp; Daniel | Casamento 08.08.2026</title>
-  <meta name="description" content="Site do casamento de Ana Carolina e Daniel — 08 de agosto de 2026, Lago Norte, Brasília." />
+  <title>Ana Carolina &amp; Daniel | Experiência Digital</title>
+  <meta name="description" content="Experiência digital do casamento de Ana Carolina e Daniel." />
+  <meta name="theme-color" content="#faf8f4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Petit+Formal+Script&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -22,6 +23,7 @@
         <li><a href="cardapio.html">Cardápio</a></li>
         <li><a href="drinks.html">Drinks</a></li>
         <li><a href="album.html">Álbum Colaborativo</a></li>
+        <li><a href="playlist.html">Playlist</a></li>
         <li><a href="mural.html">Mural de Recados</a></li>
         <li><a href="solteiros.html">Jornal dos Solteiros</a></li>
         <li><a href="mapa.html">Mapa da Festa</a></li>
@@ -30,31 +32,138 @@
   </header>
 
   <main>
-    <section class="hero">
-      <p class="hero-eyebrow">Estamos nos casando</p>
-      <h1>Ana Carolina <span class="hero-amp">&amp;</span> Daniel</h1>
-      <p class="data-local">08 · 08 · 2026 &nbsp;—&nbsp; Lago Norte, Brasília</p>
-
-      <div class="divider"></div>
-      <p style="max-width:520px; margin: 0 auto 2rem; color: var(--cor-texto-claro); font-size: 0.92rem;">
-        Ficamos muito felizes em celebrar esse dia com você. Aqui você encontra tudo sobre a
-        nossa festa: cronograma, cardápio, drinks, álbum colaborativo, mural de recados,
-        o Jornal dos Solteiros e o mapa da festa.
+    <section class="hero hero-home reveal">
+      <p class="hero-eyebrow">Ana Carolina &amp; Daniel</p>
+      <h1>Bem-vindos à nossa<br /><span class="hero-highlight">Experiência Digital</span></h1>
+      <p class="hero-lead">
+        Preparamos algumas experiências para tornar esse dia ainda mais especial.
+        Explore cada uma delas.
       </p>
-      <a href="cronograma.html" class="btn">Ver cronograma do dia</a>
+      <div class="divider"></div>
     </section>
 
-    <section class="section">
+    <section class="section section-experiencia">
       <div class="container">
-        <h2 class="section-title">Explore o site</h2>
-        <p class="section-subtitle">Tudo o que você precisa saber para curtir a nossa festa.</p>
-        <div class="grid grid-3">
-          <a class="card" href="cardapio.html"><h3>Cardápio</h3><p>Confira o menu digital da festa.</p></a>
-          <a class="card" href="drinks.html"><h3>Drinks</h3><p>Nossos coquetéis e bebidas especiais.</p></a>
-          <a class="card" href="album.html"><h3>Álbum Colaborativo</h3><p>Envie e veja as fotos da festa.</p></a>
-          <a class="card" href="mural.html"><h3>Mural de Recados</h3><p>Deixe uma mensagem para nós.</p></a>
-          <a class="card" href="solteiros.html"><h3>Jornal dos Solteiros</h3><p>Edição especial só pra descontrair.</p></a>
-          <a class="card" href="mapa.html"><h3>Mapa da Festa</h3><p>Como chegar e onde fica cada coisa.</p></a>
+        <!-- Barra de progresso / gamificação -->
+        <div class="progresso reveal" id="progresso" aria-live="polite">
+          <div class="progresso-header">
+            <span class="progresso-titulo">Experiência Digital</span>
+            <span class="progresso-contador" id="progresso-contador">0/8</span>
+          </div>
+          <div class="progresso-barra"><span class="progresso-fill" id="progresso-fill"></span></div>
+          <ul class="progresso-lista" id="progresso-lista"></ul>
+          <p class="progresso-final" id="progresso-final" hidden>
+            Você explorou toda a experiência digital do casamento!<br />
+            <span>Obrigado por fazer parte deste momento.</span>
+          </p>
+        </div>
+
+        <p class="experiencia-intro reveal">
+          Tudo o que você precisa para aproveitar nossa festa está aqui.
+        </p>
+
+        <!-- Cronograma em destaque (CTA principal) -->
+        <a class="xp-card xp-featured reveal" href="cronograma.html">
+          <span class="xp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </span>
+          <span class="xp-body">
+            <span class="xp-title">Cronograma do dia</span>
+            <span class="xp-desc">Acompanhe cada momento da festa, do "sim" à pista.</span>
+          </span>
+          <span class="xp-arrow">Abrir &rarr;</span>
+        </a>
+
+        <!-- Grid de experiências -->
+        <div class="xp-grid">
+          <a class="xp-card reveal" href="cardapio.html" style="--i:0">
+            <span class="xp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v7a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3"/><path d="M6 12v9"/><path d="M17 3c-1.5 0-2.5 1.8-2.5 4.5S15.5 12 17 12"/><path d="M17 3v18"/></svg>
+            </span>
+            <span class="xp-body">
+              <span class="xp-title">Cardápio</span>
+              <span class="xp-desc">O menu completo da festa.</span>
+            </span>
+            <span class="xp-arrow">Abrir &rarr;</span>
+          </a>
+
+          <a class="xp-card reveal" href="drinks.html" style="--i:1">
+            <span class="xp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14l-7 8z"/><path d="M12 11v8"/><path d="M8 21h8"/></svg>
+            </span>
+            <span class="xp-body">
+              <span class="xp-title">Drinks</span>
+              <span class="xp-desc">Nossos coquetéis especiais.</span>
+            </span>
+            <span class="xp-arrow">Abrir &rarr;</span>
+          </a>
+
+          <a class="xp-card reveal" href="album.html" style="--i:2">
+            <span class="xp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </span>
+            <span class="xp-body">
+              <span class="xp-title">Álbum</span>
+              <span class="xp-desc">Envie e veja as fotos.</span>
+            </span>
+            <span class="xp-arrow">Abrir &rarr;</span>
+          </a>
+
+          <a class="xp-card reveal" href="playlist.html" style="--i:3">
+            <span class="xp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            </span>
+            <span class="xp-body">
+              <span class="xp-title">Playlist</span>
+              <span class="xp-desc">A trilha sonora da noite.</span>
+            </span>
+            <span class="xp-arrow">Abrir &rarr;</span>
+          </a>
+
+          <a class="xp-card reveal" href="mural.html" style="--i:4">
+            <span class="xp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            </span>
+            <span class="xp-body">
+              <span class="xp-title">Mural de Recados</span>
+              <span class="xp-desc">Deixe uma mensagem para nós.</span>
+            </span>
+            <span class="xp-arrow">Abrir &rarr;</span>
+          </a>
+
+          <a class="xp-card reveal" href="solteiros.html" style="--i:5">
+            <span class="xp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22a2 2 0 0 1-2-2v-9h4"/><path d="M6 22h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2z"/><path d="M10 7h8"/><path d="M10 11h8"/><path d="M10 15h5"/></svg>
+            </span>
+            <span class="xp-body">
+              <span class="xp-title">Jornal dos Solteiros</span>
+              <span class="xp-desc">Edição especial da festa.</span>
+            </span>
+            <span class="xp-arrow">Abrir &rarr;</span>
+          </a>
+
+          <a class="xp-card reveal" href="mapa.html" style="--i:6">
+            <span class="xp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <span class="xp-body">
+              <span class="xp-title">Mapa da Festa</span>
+              <span class="xp-desc">Como chegar e onde fica cada coisa.</span>
+            </span>
+            <span class="xp-arrow">Abrir &rarr;</span>
+          </a>
+
+          <!-- Card surpresa: desbloqueia automaticamente no horário configurado em js/main.js -->
+          <button type="button" class="xp-card xp-surprise is-locked reveal" id="surpresa-card" style="--i:7" aria-live="polite">
+            <span class="xp-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8"/><path d="M16.5 8a2.5 2.5 0 0 0 0-5C13 3 12 8 12 8"/></svg>
+            </span>
+            <span class="xp-body">
+              <span class="xp-title">Surpresa</span>
+              <span class="xp-desc" id="surpresa-desc">Disponível mais tarde...</span>
+            </span>
+            <span class="xp-arrow" id="surpresa-arrow"></span>
+          </button>
         </div>
       </div>
     </section>

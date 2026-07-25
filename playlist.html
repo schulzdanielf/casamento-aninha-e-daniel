@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mural de Recados | Ana Carolina &amp; Daniel</title>
+  <title>Playlist | Ana Carolina &amp; Daniel</title>
+  <meta name="theme-color" content="#faf8f4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Petit+Formal+Script&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -32,19 +33,31 @@
   <main>
     <section class="section">
       <div class="container">
-        <h1 class="section-title">Mural de Recados</h1>
-        <p class="section-subtitle">Deixe uma mensagem, um conselho de casal ou um carinho para Ana Carolina e Daniel. Todas as mensagens aparecem aqui em tempo real.</p>
+        <h1 class="section-title reveal">Playlist</h1>
+        <p class="section-subtitle reveal">A trilha sonora da nossa festa. Dê o play e cante com a gente!</p>
 
-        <form class="mural-form" id="mural-form">
-          <input type="text" name="nome" maxlength="60" placeholder="Seu nome (opcional)" />
-          <textarea name="mensagem" maxlength="500" placeholder="Escreva sua mensagem para o casal..." required></textarea>
-          <button type="submit" class="btn">Enviar mensagem</button>
-          <p class="mural-status" id="mural-status"></p>
-        </form>
-
-        <div class="mural-list" id="mural-list">
-          <p class="mural-empty">Carregando mensagens...</p>
+        <div class="playlist-box reveal">
+          <!--
+            IMPORTANTE: substitua o src abaixo pelo embed da sua playlist do Spotify.
+            No Spotify: abra a playlist > ... (Mais opções) > Compartilhar > Incorporar
+            playlist > copie o valor do atributo "src" e cole aqui.
+          -->
+          <iframe
+            title="Playlist do casamento no Spotify"
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcRXFNfZr7Tp?utm_source=generator"
+            width="100%"
+            height="480"
+            frameborder="0"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
         </div>
+
+        <p class="reveal" style="text-align:center; margin-top:2.5rem; color: var(--cor-texto-claro);">
+          Tem uma música que não pode faltar? Peça no nosso Mural de Recados.
+        </p>
       </div>
     </section>
   </main>
@@ -54,6 +67,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script type="module" src="js/mural.js"></script>
 </body>
 </html>
