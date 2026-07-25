@@ -11,7 +11,7 @@ const EXPERIENCIAS = [
   { key: "drinks.html", label: "Drinks" },
   { key: "album.html", label: "Fotos" },
   { key: "playlist.html", label: "Playlist" },
-  { key: "solteiros.html", label: "Jornal dos Solteiros" },
+  { key: "solteiros.html", label: "Elenco da Festa" },
   { key: "mural.html", label: "Mural" },
   { key: "mapa.html", label: "Mapa" },
 ];

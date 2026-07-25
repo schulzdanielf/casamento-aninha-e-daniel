@@ -601,6 +601,12 @@ img {
   color: var(--cor-texto-claro);
 }
 
+.jornal-header .edicao-destaque {
+  margin-top: 0.5rem;
+  color: var(--cor-terracota);
+  font-weight: 600;
+}
+
 .solteiro-card {
   background: transparent;
   border: 1px solid var(--cor-linha);
