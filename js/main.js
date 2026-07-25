@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   registrarVisita();
   renderProgresso();
   configurarSurpresa();
+  embaralharSolteiros();
   configurarAnimacoesScroll();
 });
 
@@ -142,6 +143,26 @@ function configurarSurpresa() {
     const mm = String(SURPRESA_UNLOCK.getMinutes()).padStart(2, "0");
     if (desc) desc.textContent = "Disponível a partir das " + hh + "h" + mm;
   }
+}
+
+// ---------- Jornal dos Solteiros: ordem embaralhada a cada visita ----------
+function embaralharSolteiros() {
+  const grid = document.querySelector(".grid-3");
+  if (!grid) return;
+
+  const cards = Array.from(grid.querySelectorAll(".solteiro-card"));
+  if (cards.length < 2) return;
+
+  // Fisher-Yates shuffle
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+
+  cards.forEach((card, indice) => {
+    card.style.setProperty("--i", indice);
+    grid.appendChild(card);
+  });
 }
 
 // ---------- Animações de scroll (fade-in escalonado) ----------
