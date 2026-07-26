@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mapa da Festa | Ana Carolina &amp; Daniel</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Petit+Formal+Script&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -50,12 +51,32 @@
         </div>
 
         <div class="planta-baixa">
-          <h3 style="text-align:center; margin-bottom:1rem;">Planta do salão</h3>
+          <h3 style="text-align:center; margin-bottom:0.4rem;">Planta do salão</h3>
+          <p style="text-align:center; margin-bottom:1.2rem; color: var(--cor-texto-claro); font-size:0.88rem;">
+            Arraste para navegar e use os botões (ou o scroll) para ampliar.
+          </p>
+
           <!--
-            Substitua a imagem abaixo por uma planta baixa real do local
-            (ex.: recepção, mesas, pista de dança, bar, banheiros).
+            Substitua a imagem abaixo pela planta baixa real do local
+            (ex.: exportação do projeto do SketchUp com mesas, pista,
+            bar, banheiros etc.). Recomendado: imagem grande e em boa
+            resolução, o visualizador permite zoom e arraste.
           -->
-          <img src="https://via.placeholder.com/800x500?text=Planta+baixa+do+sal%C3%A3o" alt="Planta baixa do salão de festas" />
+          <div class="planta-viewer" id="planta-viewer">
+            <div class="planta-viewer-track" id="planta-track">
+              <img
+                id="planta-imagem"
+                src="https://via.placeholder.com/1600x1000?text=Planta+baixa+do+sal%C3%A3o"
+                alt="Planta baixa do salão de festas"
+                draggable="false"
+              />
+            </div>
+            <div class="planta-controls">
+              <button type="button" id="planta-zoom-out" aria-label="Diminuir zoom">−</button>
+              <button type="button" id="planta-zoom-reset" aria-label="Restaurar zoom">⤾</button>
+              <button type="button" id="planta-zoom-in" aria-label="Aumentar zoom">+</button>
+            </div>
+          </div>
         </div>
 
         <p style="text-align:center; margin-top:2.5rem; color: var(--cor-texto-claro);">

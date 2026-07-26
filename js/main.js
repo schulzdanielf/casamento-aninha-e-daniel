@@ -18,13 +18,21 @@ const EXPERIENCIAS = [
 
 const STORAGE_KEY = "experiencia-visitadas";
 
-// Horário em que o card "Surpresa" é desbloqueado automaticamente.
-// Ajuste a data/hora conforme desejar (fuso -03:00 = horário de Brasília).
-const SURPRESA_UNLOCK = new Date("2026-08-08T22:00:00-03:00");
-const SURPRESA_CONTEUDO = {
-  titulo: "Hora do Whisky",
-  desc: "Passe no bar: o whisky especial dos noivos está liberado!",
-};
+// Eventos do card "Surpresa" — desbloqueiam automaticamente no horário.
+// Ajuste as datas/horas conforme a organização da festa (fuso -03:00 = Brasília).
+// Quando mais de um já estiver liberado, mostra sempre o mais recente.
+const SURPRESAS = [
+  {
+    hora: new Date("2026-08-08T22:00:00-03:00"),
+    titulo: "Hora do Whisky",
+    desc: "Passe no bar: o whisky especial dos noivos está liberado!",
+  },
+  {
+    hora: new Date("2026-08-08T23:30:00-03:00"),
+    titulo: "Hora do Buquê",
+    desc: "Solteiras, se aproximem da pista! Está quase na hora do buquê.",
+  },
+];
 
 document.addEventListener("DOMContentLoaded", () => {
   configurarMenu();
@@ -34,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProgresso();
   configurarSurpresa();
   embaralharSolteiros();
+  configurarPlantaBaixa();
   configurarAnimacoesScroll();
 });
 
@@ -131,16 +140,20 @@ function configurarSurpresa() {
   const titulo = card.querySelector(".xp-title");
   const agora = new Date();
 
-  if (agora >= SURPRESA_UNLOCK) {
+  const desbloqueadas = SURPRESAS.filter((s) => agora >= s.hora);
+
+  if (desbloqueadas.length > 0) {
+    const atual = desbloqueadas[desbloqueadas.length - 1];
     card.classList.remove("is-locked");
     card.classList.add("is-unlocked");
-    if (titulo) titulo.textContent = SURPRESA_CONTEUDO.titulo;
-    if (desc) desc.textContent = SURPRESA_CONTEUDO.desc;
+    if (titulo) titulo.textContent = atual.titulo;
+    if (desc) desc.textContent = atual.desc;
     if (arrow) arrow.textContent = "";
   } else {
-    // Mostra o horário previsto de liberação
-    const hh = String(SURPRESA_UNLOCK.getHours()).padStart(2, "0");
-    const mm = String(SURPRESA_UNLOCK.getMinutes()).padStart(2, "0");
+    // Mostra o horário da próxima surpresa a ser liberada
+    const proxima = SURPRESAS[0];
+    const hh = String(proxima.hora.getHours()).padStart(2, "0");
+    const mm = String(proxima.hora.getMinutes()).padStart(2, "0");
     if (desc) desc.textContent = "Disponível a partir das " + hh + "h" + mm;
   }
 }
@@ -162,6 +175,112 @@ function embaralharSolteiros() {
   cards.forEach((card, indice) => {
     card.style.setProperty("--i", indice);
     grid.appendChild(card);
+  });
+}
+
+// ---------- Mapa da festa: planta baixa navegável (arrastar + zoom) ----------
+function configurarPlantaBaixa() {
+  const viewer = document.getElementById("planta-viewer");
+  const track = document.getElementById("planta-track");
+  const imagem = document.getElementById("planta-imagem");
+  if (!viewer || !track || !imagem) return;
+
+  const ZOOM_MIN = 1;
+  const ZOOM_MAX = 4;
+  const ZOOM_PASSO = 0.4;
+
+  let escala = 1;
+  let posX = 0;
+  let posY = 0;
+  let arrastando = false;
+  let inicioX = 0;
+  let inicioY = 0;
+
+  function aplicarTransformacao() {
+    track.style.transform = "translate(" + posX + "px, " + posY + "px) scale(" + escala + ")";
+  }
+
+  function limitarPosicao() {
+    // Evita arrastar a imagem para muito longe da área visível
+    const limiteX = viewer.clientWidth * (escala - 1) + viewer.clientWidth * 0.5;
+    const limiteY = viewer.clientHeight * (escala - 1) + viewer.clientHeight * 0.5;
+    posX = Math.max(-limiteX, Math.min(limiteX, posX));
+    posY = Math.max(-limiteY, Math.min(limiteY, posY));
+  }
+
+  function ajustarZoom(delta) {
+    const anterior = escala;
+    escala = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, escala + delta));
+    if (escala === ZOOM_MIN) {
+      posX = 0;
+      posY = 0;
+    } else {
+      // Compensa a posição para o zoom parecer centralizado
+      const fator = escala / anterior;
+      posX *= fator;
+      posY *= fator;
+      limitarPosicao();
+    }
+    viewer.classList.toggle("pode-arrastar", escala > ZOOM_MIN);
+    aplicarTransformacao();
+  }
+
+  // Arrastar com mouse/touch (Pointer Events cobre os dois)
+  viewer.addEventListener("pointerdown", (evento) => {
+    if (escala <= ZOOM_MIN) return;
+    arrastando = true;
+    inicioX = evento.clientX - posX;
+    inicioY = evento.clientY - posY;
+    viewer.setPointerCapture(evento.pointerId);
+    viewer.classList.add("arrastando");
+  });
+
+  viewer.addEventListener("pointermove", (evento) => {
+    if (!arrastando) return;
+    posX = evento.clientX - inicioX;
+    posY = evento.clientY - inicioY;
+    limitarPosicao();
+    aplicarTransformacao();
+  });
+
+  function pararArraste() {
+    arrastando = false;
+    viewer.classList.remove("arrastando");
+  }
+
+  viewer.addEventListener("pointerup", pararArraste);
+  viewer.addEventListener("pointerleave", pararArraste);
+  viewer.addEventListener("pointercancel", pararArraste);
+
+  // Zoom com scroll do mouse
+  viewer.addEventListener(
+    "wheel",
+    (evento) => {
+      evento.preventDefault();
+      ajustarZoom(evento.deltaY < 0 ? ZOOM_PASSO : -ZOOM_PASSO);
+    },
+    { passive: false }
+  );
+
+  // Botões de zoom
+  const btnMais = document.getElementById("planta-zoom-in");
+  const btnMenos = document.getElementById("planta-zoom-out");
+  const btnReset = document.getElementById("planta-zoom-reset");
+
+  if (btnMais) btnMais.addEventListener("click", () => ajustarZoom(ZOOM_PASSO));
+  if (btnMenos) btnMenos.addEventListener("click", () => ajustarZoom(-ZOOM_PASSO));
+  if (btnReset)
+    btnReset.addEventListener("click", () => {
+      escala = ZOOM_MIN;
+      posX = 0;
+      posY = 0;
+      viewer.classList.remove("pode-arrastar");
+      aplicarTransformacao();
+    });
+
+  // Duplo clique/toque para dar um zoom rápido
+  viewer.addEventListener("dblclick", () => {
+    ajustarZoom(escala > ZOOM_MIN ? ZOOM_MIN - escala : ZOOM_PASSO * 2);
   });
 }
 

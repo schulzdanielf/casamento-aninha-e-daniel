@@ -682,14 +682,82 @@ img {
 }
 
 .planta-baixa {
-  max-width: 800px;
+  max-width: 900px;
   margin: 2.8rem auto 0;
   text-align: center;
 }
 
-.planta-baixa img {
+.planta-viewer {
+  position: relative;
+  height: 480px;
   border: 1px solid var(--cor-linha);
-  border-radius: var(--raio);
+  border-radius: var(--raio-card, 12px);
+  overflow: hidden;
+  background: var(--cor-bg-alt);
+  cursor: default;
+  touch-action: none;
+}
+
+.planta-viewer.pode-arrastar {
+  cursor: grab;
+}
+
+.planta-viewer.arrastando {
+  cursor: grabbing;
+}
+
+.planta-viewer-track {
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.planta-viewer.arrastando .planta-viewer-track {
+  transition: none;
+}
+
+.planta-viewer-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.planta-controls {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.planta-controls button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--cor-linha);
+  background: var(--cor-branco);
+  color: var(--cor-texto);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--sombra);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.planta-controls button:hover {
+  background: var(--cor-bg-alt);
+  border-color: var(--cor-verde);
+}
+
+@media (max-width: 600px) {
+  .planta-viewer {
+    height: 360px;
+  }
 }
 
 /* ---------- Footer ---------- */
