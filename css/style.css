@@ -312,6 +312,14 @@ img {
   .grid-3 { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* Elenco da Festa: 2 colunas já no mobile (telas bem pequenas ficam em 1) */
+@media (min-width: 380px) {
+  .grid-solteiros {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
 /* ---------- Cronograma ---------- */
 .timeline {
   position: relative;
