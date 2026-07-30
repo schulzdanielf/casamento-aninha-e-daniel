@@ -10,7 +10,7 @@ const EXPERIENCIAS = [
   { key: "cardapio.html", label: "Cardápio" },
   { key: "drinks.html", label: "Drinks" },
   { key: "album.html", label: "Fotos" },
-  { key: "playlist.html", label: "Playlist" },
+  { key: "docinhos.html", label: "Docinhos" },
   { key: "solteiros.html", label: "Elenco da Festa" },
   { key: "mural.html", label: "Mural" },
   { key: "mapa.html", label: "Mapa" },
