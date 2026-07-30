@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   configurarSurpresa();
   embaralharSolteiros();
   configurarPlantaBaixa();
+  configurarMapTooltips();
   configurarAnimacoesScroll();
 });
 
@@ -227,6 +228,7 @@ function configurarPlantaBaixa() {
 
   // Arrastar com mouse/touch (Pointer Events cobre os dois)
   viewer.addEventListener("pointerdown", (evento) => {
+    if (evento.target.closest(".map-pin")) return;
     if (escala <= ZOOM_MIN) return;
     arrastando = true;
     inicioX = evento.clientX - posX;
@@ -281,6 +283,42 @@ function configurarPlantaBaixa() {
   // Duplo clique/toque para dar um zoom rápido
   viewer.addEventListener("dblclick", () => {
     ajustarZoom(escala > ZOOM_MIN ? ZOOM_MIN - escala : ZOOM_PASSO * 2);
+  });
+}
+
+// ---------- Mapa da festa: tooltips dos marcadores ----------
+function configurarMapTooltips() {
+  const pins = document.querySelectorAll(".map-pin[data-tooltip]");
+  if (!pins.length) return;
+
+  pins.forEach((pin) => {
+    const tooltip = document.createElement("span");
+    tooltip.className = "map-tooltip";
+    tooltip.textContent = pin.dataset.tooltip || "";
+    pin.insertAdjacentElement("afterend", tooltip);
+
+    pin.addEventListener("click", (evento) => {
+      evento.stopPropagation();
+
+      const isOpen = pin.classList.contains("is-open");
+
+      pins.forEach((otherPin) => {
+        otherPin.classList.remove("is-open");
+        otherPin.setAttribute("aria-expanded", "false");
+      });
+
+      if (!isOpen) {
+        pin.classList.add("is-open");
+        pin.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  document.addEventListener("click", () => {
+    pins.forEach((pin) => {
+      pin.classList.remove("is-open");
+      pin.setAttribute("aria-expanded", "false");
+    });
   });
 }
 

@@ -707,6 +707,7 @@ img {
 }
 
 .planta-viewer-track {
+  position: relative;
   width: 100%;
   height: 100%;
   transform-origin: center center;
@@ -725,6 +726,64 @@ img {
   -webkit-user-drag: none;
   user-select: none;
   pointer-events: none;
+}
+
+.map-marker {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  transform: translate(-50%, -100%);
+  z-index: 5;
+}
+
+.map-pin {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(95, 107, 76, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--cor-verde-escuro);
+  font-size: 1.45rem;
+  line-height: 1;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(55, 53, 44, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.map-pin:hover,
+.map-pin:focus-visible,
+.map-pin.is-open {
+  transform: scale(1.06);
+  border-color: rgba(95, 107, 76, 0.45);
+  box-shadow: 0 12px 24px rgba(55, 53, 44, 0.16);
+}
+
+.map-pin:focus-visible {
+  outline: 2px solid rgba(95, 107, 76, 0.35);
+  outline-offset: 3px;
+}
+
+.map-emoji {
+  display: block;
+  line-height: 1;
+}
+
+.map-label {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(95, 107, 76, 0.12);
+  color: var(--cor-texto);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 6px 14px rgba(55, 53, 44, 0.08);
 }
 
 .planta-controls {
@@ -1223,38 +1282,3 @@ img {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
-
-(function initMapTooltips() {
-  const pins = document.querySelectorAll(".map-pin[data-tooltip]");
-  if (!pins.length) return;
-
-  pins.forEach((pin) => {
-    const tooltip = document.createElement("span");
-    tooltip.className = "map-tooltip";
-    tooltip.textContent = pin.dataset.tooltip || "";
-    pin.insertAdjacentElement("afterend", tooltip);
-
-    pin.addEventListener("click", (e) => {
-      e.stopPropagation();
-
-      const isOpen = pin.classList.contains("is-open");
-
-      pins.forEach((otherPin) => {
-        otherPin.classList.remove("is-open");
-        otherPin.setAttribute("aria-expanded", "false");
-      });
-
-      if (!isOpen) {
-        pin.classList.add("is-open");
-        pin.setAttribute("aria-expanded", "true");
-      }
-    });
-  });
-
-  document.addEventListener("click", () => {
-    pins.forEach((pin) => {
-      pin.classList.remove("is-open");
-      pin.setAttribute("aria-expanded", "false");
-    });
-  });
-})();
