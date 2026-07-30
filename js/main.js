@@ -8,7 +8,7 @@
 const EXPERIENCIAS = [
   { key: "cronograma.html", label: "Cronograma" },
   { key: "cardapio.html", label: "Cardápio" },
-  { key: "drinks.html", label: "Drinks" },
+  { key: "drinks.html", label: "Bebidas" },
   { key: "album.html", label: "Fotos" },
   { key: "docinhos.html", label: "Docinhos" },
   { key: "solteiros.html", label: "Elenco da Festa" },
