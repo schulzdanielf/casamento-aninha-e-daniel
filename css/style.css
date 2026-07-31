@@ -772,20 +772,6 @@ img {
   line-height: 1;
 }
 
-.map-label {
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(95, 107, 76, 0.12);
-  color: var(--cor-texto);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  white-space: nowrap;
-  pointer-events: none;
-  box-shadow: 0 6px 14px rgba(55, 53, 44, 0.08);
-}
-
 .planta-controls {
   position: absolute;
   right: 0.9rem;
