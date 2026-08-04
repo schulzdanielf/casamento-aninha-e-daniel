@@ -210,6 +210,13 @@ function configurarPlantaBaixa() {
   let marcadorArrastando = null;
   let outputPosicoes = null;
   let statusEdicao = null;
+  let pinchAtivo = false;
+  let distanciaInicialPinch = 0;
+  let escalaInicialPinch = 1;
+  let posXInicialPinch = 0;
+  let posYInicialPinch = 0;
+  let referenciaPinchX = 0;
+  let referenciaPinchY = 0;
 
   function limitarPercentual(valor) {
     return Math.max(0, Math.min(100, valor));
@@ -302,6 +309,35 @@ function configurarPlantaBaixa() {
     track.style.transform = "translate(" + posX + "px, " + posY + "px) scale(" + escala + ")";
   }
 
+  function distanciaEntreToques(toqueA, toqueB) {
+    return Math.hypot(toqueA.clientX - toqueB.clientX, toqueA.clientY - toqueB.clientY);
+  }
+
+  function centroEntreToques(toqueA, toqueB) {
+    return {
+      x: (toqueA.clientX + toqueB.clientX) / 2,
+      y: (toqueA.clientY + toqueB.clientY) / 2,
+    };
+  }
+
+  function atualizarZoomComReferencia(novaEscala, referenciaX, referenciaY) {
+    const anterior = escala;
+    escala = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, novaEscala));
+
+    if (escala === ZOOM_MIN) {
+      posX = 0;
+      posY = 0;
+    } else {
+      const fator = escala / anterior;
+      posX = (posX - referenciaX) * fator + referenciaX;
+      posY = (posY - referenciaY) * fator + referenciaY;
+      limitarPosicao();
+    }
+
+    viewer.classList.toggle("pode-arrastar", escala > ZOOM_MIN);
+    aplicarTransformacao();
+  }
+
   function limitarPosicao() {
     // Evita arrastar a imagem para muito longe da área visível
     const limiteX = viewer.clientWidth * (escala - 1) + viewer.clientWidth * 0.5;
@@ -325,6 +361,37 @@ function configurarPlantaBaixa() {
     }
     viewer.classList.toggle("pode-arrastar", escala > ZOOM_MIN);
     aplicarTransformacao();
+  }
+
+  function iniciarPinch(toqueA, toqueB) {
+    arrastando = false;
+    marcadorArrastando = null;
+    viewer.classList.remove("arrastando");
+    viewer.classList.remove("editando-marcador");
+
+    pinchAtivo = true;
+    distanciaInicialPinch = distanciaEntreToques(toqueA, toqueB);
+    escalaInicialPinch = escala;
+    posXInicialPinch = posX;
+    posYInicialPinch = posY;
+
+    const centro = centroEntreToques(toqueA, toqueB);
+    referenciaPinchX = centro.x;
+    referenciaPinchY = centro.y;
+  }
+
+  function atualizarPinch(toqueA, toqueB) {
+    if (!pinchAtivo || distanciaInicialPinch <= 0) return;
+
+    const novaDistancia = distanciaEntreToques(toqueA, toqueB);
+    const fatorPinch = novaDistancia / distanciaInicialPinch;
+    const novaEscala = escalaInicialPinch * fatorPinch;
+
+    atualizarZoomComReferencia(novaEscala, referenciaPinchX, referenciaPinchY);
+  }
+
+  function encerrarPinch() {
+    pinchAtivo = false;
   }
 
   // Arrastar com mouse/touch (Pointer Events cobre os dois)
@@ -375,6 +442,40 @@ function configurarPlantaBaixa() {
   viewer.addEventListener("pointerup", pararArraste);
   viewer.addEventListener("pointerleave", pararArraste);
   viewer.addEventListener("pointercancel", pararArraste);
+
+  viewer.addEventListener(
+    "touchstart",
+    (evento) => {
+      if (evento.touches.length === 2) {
+        evento.preventDefault();
+        iniciarPinch(evento.touches[0], evento.touches[1]);
+      }
+    },
+    { passive: false }
+  );
+
+  viewer.addEventListener(
+    "touchmove",
+    (evento) => {
+      if (evento.touches.length === 2 && pinchAtivo) {
+        evento.preventDefault();
+        atualizarPinch(evento.touches[0], evento.touches[1]);
+      }
+    },
+    { passive: false }
+  );
+
+  viewer.addEventListener(
+    "touchend",
+    (evento) => {
+      if (evento.touches.length < 2) {
+        encerrarPinch();
+      }
+    },
+    { passive: false }
+  );
+
+  viewer.addEventListener("touchcancel", encerrarPinch, { passive: false });
 
   // Zoom com scroll do mouse
   viewer.addEventListener(

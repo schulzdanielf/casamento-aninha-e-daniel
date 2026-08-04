@@ -697,6 +697,8 @@ img {
   background: var(--cor-bg-alt);
   cursor: default;
   touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .planta-viewer.pode-arrastar {
