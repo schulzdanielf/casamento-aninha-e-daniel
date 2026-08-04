@@ -696,7 +696,7 @@ img {
   overflow: hidden;
   background: var(--cor-bg-alt);
   cursor: default;
-  touch-action: none;
+  touch-action: manipulation;
   -webkit-user-select: none;
   user-select: none;
 }

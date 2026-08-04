@@ -477,6 +477,36 @@ function configurarPlantaBaixa() {
 
   viewer.addEventListener("touchcancel", encerrarPinch, { passive: false });
 
+  viewer.addEventListener(
+    "gesturestart",
+    (evento) => {
+      evento.preventDefault();
+      pinchAtivo = true;
+      escalaInicialPinch = escala;
+      referenciaPinchX = evento.clientX || viewer.clientWidth / 2;
+      referenciaPinchY = evento.clientY || viewer.clientHeight / 2;
+    },
+    { passive: false }
+  );
+
+  viewer.addEventListener(
+    "gesturechange",
+    (evento) => {
+      if (!pinchAtivo) return;
+      evento.preventDefault();
+      atualizarZoomComReferencia(escalaInicialPinch * evento.scale, referenciaPinchX, referenciaPinchY);
+    },
+    { passive: false }
+  );
+
+  viewer.addEventListener(
+    "gestureend",
+    () => {
+      encerrarPinch();
+    },
+    { passive: false }
+  );
+
   // Zoom com scroll do mouse
   viewer.addEventListener(
     "wheel",
