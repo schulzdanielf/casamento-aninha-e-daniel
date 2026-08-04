@@ -6,6 +6,7 @@
 // Lista das experiências que compõem a "jornada" do convidado.
 // A ordem aqui define a ordem exibida na barra de progresso.
 const EXPERIENCIAS = [
+  { key: "cronograma.html", label: "Cronograma" },
   { key: "mapa.html", label: "Mapa" },
   { key: "cardapio.html", label: "Cardápio" },
   { key: "drinks.html", label: "Bebidas" },
