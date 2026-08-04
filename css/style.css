@@ -1412,3 +1412,80 @@ img {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+body.map-edit-mode .planta-viewer {
+  border-color: var(--cor-verde);
+}
+
+body.map-edit-mode .map-marker {
+  cursor: move;
+}
+
+body.map-edit-mode .map-pin {
+  box-shadow: 0 0 0 2px rgba(125, 138, 104, 0.28);
+}
+
+body.map-edit-mode .planta-viewer.editando-marcador {
+  cursor: move;
+}
+
+.map-edit-panel {
+  margin-top: 1rem;
+  text-align: left;
+  border: 1px dashed var(--cor-verde);
+  border-radius: 12px;
+  padding: 0.9rem;
+  background: #f8f5ed;
+}
+
+.map-edit-panel h4 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.map-edit-panel p {
+  color: var(--cor-texto-claro);
+  font-size: 0.85rem;
+  margin-bottom: 0.65rem;
+  line-height: 1.5;
+}
+
+.map-edit-output {
+  width: 100%;
+  border: 1px solid var(--cor-linha);
+  border-radius: 10px;
+  background: var(--cor-branco);
+  color: var(--cor-texto);
+  font: 500 0.78rem/1.5 var(--fonte-sans);
+  padding: 0.6rem 0.65rem;
+  resize: vertical;
+}
+
+.map-edit-actions {
+  margin-top: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.map-edit-copy {
+  border: 1px solid var(--cor-verde);
+  background: var(--cor-verde);
+  color: var(--cor-branco);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.map-edit-copy:hover {
+  background: var(--cor-verde-escuro);
+  border-color: var(--cor-verde-escuro);
+}
+
+.map-edit-status {
+  color: var(--cor-verde-escuro);
+  font-size: 0.78rem;
+}

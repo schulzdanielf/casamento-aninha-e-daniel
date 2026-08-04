@@ -66,6 +66,11 @@ function paginaAtual() {
   return location.pathname.split("/").pop() || "index.html";
 }
 
+function estaEmModoEdicaoMapa() {
+  const params = new URLSearchParams(window.location.search);
+  return paginaAtual() === "mapa.html" && params.get("edit") === "true";
+}
+
 function marcarLinkAtivo() {
   const atual = paginaAtual();
   document.querySelectorAll(".nav-links a").forEach((link) => {
@@ -186,7 +191,11 @@ function configurarPlantaBaixa() {
   const viewer = document.getElementById("planta-viewer");
   const track = document.getElementById("planta-track");
   const imagem = document.getElementById("planta-imagem");
-  if (!viewer || !track || !imagem) return;
+  const superficie = viewer ? viewer.querySelector(".planta-map-surface") : null;
+  if (!viewer || !track || !imagem || !superficie) return;
+
+  const modoEdicao = estaEmModoEdicaoMapa();
+  const marcadores = Array.from(superficie.querySelectorAll(".map-marker"));
 
   const ZOOM_MIN = 1;
   const ZOOM_MAX = 4;
@@ -198,6 +207,90 @@ function configurarPlantaBaixa() {
   let arrastando = false;
   let inicioX = 0;
   let inicioY = 0;
+  let marcadorArrastando = null;
+  let outputPosicoes = null;
+  let statusEdicao = null;
+
+  function limitarPercentual(valor) {
+    return Math.max(0, Math.min(100, valor));
+  }
+
+  function nomeMarcador(marcador, indice) {
+    const classe = Array.from(marcador.classList).find((item) => item !== "map-marker");
+    return classe || "marker-" + String(indice + 1);
+  }
+
+  function textoPosicoes() {
+    return marcadores
+      .map((marcador, indice) => {
+        const nome = nomeMarcador(marcador, indice);
+        const left = marcador.style.left || "0%";
+        const top = marcador.style.top || "0%";
+        return nome + ": left: " + left + "; top: " + top + ";";
+      })
+      .join("\n");
+  }
+
+  function atualizarOutputEdicao() {
+    if (!outputPosicoes) return;
+    outputPosicoes.value = textoPosicoes();
+  }
+
+  function atualizarPosicaoMarcador(evento, marcador) {
+    const rect = superficie.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const left = limitarPercentual(((evento.clientX - rect.left) / rect.width) * 100);
+    const top = limitarPercentual(((evento.clientY - rect.top) / rect.height) * 100);
+
+    marcador.style.left = left.toFixed(2) + "%";
+    marcador.style.top = top.toFixed(2) + "%";
+    atualizarOutputEdicao();
+  }
+
+  function configurarEdicaoMarcadores() {
+    if (!modoEdicao || !marcadores.length) return;
+
+    document.body.classList.add("map-edit-mode");
+
+    const painel = document.createElement("aside");
+    painel.className = "map-edit-panel";
+    painel.innerHTML =
+      '<h4>Modo de edicao dos marcadores</h4>' +
+      '<p>Arraste os marcadores para ajustar as posicoes. Depois, copie o resultado para atualizar o HTML.</p>' +
+      '<textarea class="map-edit-output" rows="6" readonly></textarea>' +
+      '<div class="map-edit-actions">' +
+      '<button type="button" class="map-edit-copy">Copiar posicoes</button>' +
+      '<span class="map-edit-status" aria-live="polite"></span>' +
+      "</div>";
+
+    const base = document.querySelector(".planta-baixa");
+    if (base) base.appendChild(painel);
+
+    outputPosicoes = painel.querySelector(".map-edit-output");
+    statusEdicao = painel.querySelector(".map-edit-status");
+    const botaoCopiar = painel.querySelector(".map-edit-copy");
+
+    atualizarOutputEdicao();
+
+    if (botaoCopiar) {
+      botaoCopiar.addEventListener("click", async () => {
+        const conteudo = textoPosicoes();
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(conteudo);
+            if (statusEdicao) statusEdicao.textContent = "Posicoes copiadas.";
+          } else if (outputPosicoes) {
+            outputPosicoes.focus();
+            outputPosicoes.select();
+            if (statusEdicao) statusEdicao.textContent = "Selecione e copie manualmente (Ctrl+C).";
+          }
+        } catch (e) {
+          if (statusEdicao) statusEdicao.textContent = "Nao foi possivel copiar automaticamente.";
+        }
+      });
+    }
+  }
 
   function aplicarTransformacao() {
     track.style.transform = "translate(" + posX + "px, " + posY + "px) scale(" + escala + ")";
@@ -230,7 +323,17 @@ function configurarPlantaBaixa() {
 
   // Arrastar com mouse/touch (Pointer Events cobre os dois)
   viewer.addEventListener("pointerdown", (evento) => {
-    if (evento.target.closest(".map-pin")) return;
+    const alvoMarcador = evento.target.closest(".map-marker");
+
+    if (modoEdicao && alvoMarcador && superficie.contains(alvoMarcador)) {
+      marcadorArrastando = alvoMarcador;
+      viewer.setPointerCapture(evento.pointerId);
+      viewer.classList.add("editando-marcador");
+      atualizarPosicaoMarcador(evento, marcadorArrastando);
+      return;
+    }
+
+    if (evento.target.closest(".map-marker") || evento.target.closest(".map-pin")) return;
     if (escala <= ZOOM_MIN) return;
     arrastando = true;
     inicioX = evento.clientX - posX;
@@ -240,6 +343,11 @@ function configurarPlantaBaixa() {
   });
 
   viewer.addEventListener("pointermove", (evento) => {
+    if (marcadorArrastando) {
+      atualizarPosicaoMarcador(evento, marcadorArrastando);
+      return;
+    }
+
     if (!arrastando) return;
     posX = evento.clientX - inicioX;
     posY = evento.clientY - inicioY;
@@ -248,6 +356,12 @@ function configurarPlantaBaixa() {
   });
 
   function pararArraste() {
+    if (marcadorArrastando) {
+      marcadorArrastando = null;
+      viewer.classList.remove("editando-marcador");
+      atualizarOutputEdicao();
+    }
+
     arrastando = false;
     viewer.classList.remove("arrastando");
   }
@@ -286,6 +400,8 @@ function configurarPlantaBaixa() {
   viewer.addEventListener("dblclick", () => {
     ajustarZoom(escala > ZOOM_MIN ? ZOOM_MIN - escala : ZOOM_PASSO * 2);
   });
+
+  configurarEdicaoMarcadores();
 }
 
 // ---------- Gibi do Guigo: páginas em sequência com efeito de virar ----------
@@ -375,6 +491,8 @@ function configurarGibi() {
 
 // ---------- Mapa da festa: tooltips dos marcadores ----------
 function configurarMapTooltips() {
+  if (estaEmModoEdicaoMapa()) return;
+
   const pins = document.querySelectorAll(".map-pin[data-tooltip]");
   if (!pins.length) return;
 
