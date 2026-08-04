@@ -292,27 +292,71 @@ function configurarPlantaBaixa() {
 function configurarGibi() {
   const viewer = document.getElementById("gibi-viewer");
   const imagem = document.getElementById("gibi-imagem");
+  const slideTexto = document.getElementById("gibi-texto");
+  const slideTextoTitulo = document.getElementById("gibi-texto-titulo");
+  const slideTextoConteudo = document.getElementById("gibi-texto-conteudo");
   const contador = document.getElementById("gibi-counter");
   const btnAnterior = document.getElementById("gibi-prev");
   const btnProximo = document.getElementById("gibi-next");
-  if (!viewer || !imagem || !contador || !btnAnterior || !btnProximo) return;
+  if (
+    !viewer ||
+    !imagem ||
+    !slideTexto ||
+    !slideTextoTitulo ||
+    !slideTextoConteudo ||
+    !contador ||
+    !btnAnterior ||
+    !btnProximo
+  )
+    return;
 
-  const totalPaginas = 7;
-  let paginaAtual = 1;
+  const totalPaginasGibi = 7;
+  const slides = [
+    {
+      tipo: "texto",
+      titulo: "Antes da capa",
+      conteudo:
+        "Dias antes do casamento, o Guigo nos surpreendeu com um presente muito especial: um gibi contando a aventura do Sargento Mictório para salvar o nosso bolo de casamento. Gostamos tanto da ideia que decidimos transformar seus desenhos em uma versão digital, preservando todo o charme, a criatividade e a imaginação da história original.",
+    },
+    ...Array.from({ length: totalPaginasGibi }, (_, indice) => ({
+      tipo: "imagem",
+      pagina: indice + 1,
+    })),
+    {
+      tipo: "texto",
+      titulo: "Sobre o Guigo",
+      conteudo:
+        "O Guigo é um dos nossos pajens e uma verdadeira caixinha de criatividade. Além de criar histórias em quadrinhos, ele também é ator, já participou de propagandas na TV e de minisséries em plataformas de streaming. E, segundo o noivo, também joga futebol melhor que o pai, o Guto.",
+    },
+  ];
+
+  let paginaAtual = 0;
 
   function atualizarPagina() {
-    imagem.src = "assets/gibi/" + paginaAtual + ".png";
-    imagem.alt = "Página " + paginaAtual + " do gibi";
-    contador.textContent = paginaAtual + " / " + totalPaginas;
-    btnAnterior.disabled = paginaAtual === 1;
-    btnProximo.disabled = paginaAtual === totalPaginas;
+    const slideAtual = slides[paginaAtual];
+    const ehImagem = slideAtual.tipo === "imagem";
+
+    imagem.hidden = !ehImagem;
+    slideTexto.hidden = ehImagem;
+
+    if (ehImagem) {
+      imagem.src = "assets/gibi/" + slideAtual.pagina + ".png";
+      imagem.alt = "Página " + slideAtual.pagina + " do gibi";
+    } else {
+      slideTextoTitulo.textContent = slideAtual.titulo;
+      slideTextoConteudo.textContent = slideAtual.conteudo;
+    }
+
+    contador.textContent = paginaAtual + 1 + " / " + slides.length;
+    btnAnterior.disabled = paginaAtual === 0;
+    btnProximo.disabled = paginaAtual === slides.length - 1;
     viewer.classList.remove("is-turning");
     void viewer.offsetWidth;
     viewer.classList.add("is-turning");
   }
 
   function irPara(delta) {
-    const proxima = Math.min(totalPaginas, Math.max(1, paginaAtual + delta));
+    const proxima = Math.min(slides.length - 1, Math.max(0, paginaAtual + delta));
     if (proxima === paginaAtual) return;
     paginaAtual = proxima;
     atualizarPagina();
