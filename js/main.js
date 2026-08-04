@@ -6,15 +6,14 @@
 // Lista das experiências que compõem a "jornada" do convidado.
 // A ordem aqui define a ordem exibida na barra de progresso.
 const EXPERIENCIAS = [
-  { key: "cronograma.html", label: "Cronograma" },
+  { key: "mapa.html", label: "Mapa" },
   { key: "cardapio.html", label: "Cardápio" },
   { key: "drinks.html", label: "Bebidas" },
   { key: "album.html", label: "Fotos" },
   { key: "gibi.html", label: "Gibi do Guigo" },
   { key: "docinhos.html", label: "Docinhos" },
-  { key: "solteiros.html", label: "Elenco da Festa" },
   { key: "mural.html", label: "Mural" },
-  { key: "mapa.html", label: "Mapa" },
+  { key: "solteiros.html", label: "Elenco da Festa" },
 ];
 
 const STORAGE_KEY = "experiencia-visitadas";
@@ -262,11 +261,11 @@ function configurarPlantaBaixa() {
     const painel = document.createElement("aside");
     painel.className = "map-edit-panel";
     painel.innerHTML =
-      '<h4>Modo de edicao dos marcadores</h4>' +
-      '<p>Arraste os marcadores para ajustar as posicoes. Depois, copie o resultado para atualizar o HTML.</p>' +
+      '<h4>Modo de edição dos marcadores</h4>' +
+      '<p>Arraste os marcadores para ajustar as posições. Depois, copie o resultado para atualizar o HTML.</p>' +
       '<textarea class="map-edit-output" rows="6" readonly></textarea>' +
       '<div class="map-edit-actions">' +
-      '<button type="button" class="map-edit-copy">Copiar posicoes</button>' +
+      '<button type="button" class="map-edit-copy">Copiar posições</button>' +
       '<span class="map-edit-status" aria-live="polite"></span>' +
       "</div>";
 
@@ -285,14 +284,14 @@ function configurarPlantaBaixa() {
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) {
             await navigator.clipboard.writeText(conteudo);
-            if (statusEdicao) statusEdicao.textContent = "Posicoes copiadas.";
+            if (statusEdicao) statusEdicao.textContent = "Posições copiadas.";
           } else if (outputPosicoes) {
             outputPosicoes.focus();
             outputPosicoes.select();
             if (statusEdicao) statusEdicao.textContent = "Selecione e copie manualmente (Ctrl+C).";
           }
         } catch (e) {
-          if (statusEdicao) statusEdicao.textContent = "Nao foi possivel copiar automaticamente.";
+          if (statusEdicao) statusEdicao.textContent = "Não foi possível copiar automaticamente.";
         }
       });
     }

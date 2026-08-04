@@ -35,7 +35,7 @@ if (form && lista) {
 
         if (snapshot.empty) {
           lista.innerHTML =
-            '<p class="mural-empty">Seja o primeiro a deixar uma mensagem para Aninha e Daniel! 💌</p>';
+            '<p class="mural-empty">Seja o primeiro a deixar uma mensagem para Ana Carolina e Daniel! 💌</p>';
           return;
         }
 
