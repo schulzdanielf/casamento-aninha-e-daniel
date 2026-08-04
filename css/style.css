@@ -710,6 +710,9 @@ img {
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transform-origin: center center;
   transition: transform 0.15s ease-out;
   will-change: transform;
@@ -717,6 +720,17 @@ img {
 
 .planta-viewer.arrastando .planta-viewer-track {
   transition: none;
+}
+
+.planta-map-surface {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: min(100%, calc(100vh * 1840 / 1230));
+  max-height: 100%;
+  aspect-ratio: 1840 / 1230;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .planta-viewer-track img {
