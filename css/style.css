@@ -833,6 +833,10 @@ img {
   padding: 1rem;
 }
 
+.gibi-viewer [hidden] {
+  display: none !important;
+}
+
 .gibi-viewer img {
   display: block;
   width: 100%;
@@ -1419,10 +1423,31 @@ body.map-edit-mode .planta-viewer {
 
 body.map-edit-mode .map-marker {
   cursor: move;
+  transform: translate(-50%, -50%);
+  z-index: 20;
 }
 
 body.map-edit-mode .map-pin {
+  width: 1.8rem;
+  height: 1.8rem;
+  font-size: 0.9rem;
   box-shadow: 0 0 0 2px rgba(125, 138, 104, 0.28);
+}
+
+body.map-edit-mode .map-marker::after {
+  content: attr(data-edit-label);
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.66rem;
+  line-height: 1;
+  color: #fff;
+  background: rgba(35, 28, 23, 0.9);
+  border-radius: 999px;
+  padding: 0.25rem 0.42rem;
+  pointer-events: none;
 }
 
 body.map-edit-mode .planta-viewer.editando-marcador {

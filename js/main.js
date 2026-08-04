@@ -253,6 +253,12 @@ function configurarPlantaBaixa() {
 
     document.body.classList.add("map-edit-mode");
 
+    marcadores.forEach((marcador, indice) => {
+      const pin = marcador.querySelector(".map-pin");
+      const rotulo = pin ? pin.getAttribute("aria-label") : "";
+      marcador.dataset.editLabel = rotulo || nomeMarcador(marcador, indice);
+    });
+
     const painel = document.createElement("aside");
     painel.className = "map-edit-panel";
     painel.innerHTML =
