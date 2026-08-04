@@ -10,6 +10,7 @@ const EXPERIENCIAS = [
   { key: "cardapio.html", label: "Cardápio" },
   { key: "drinks.html", label: "Bebidas" },
   { key: "album.html", label: "Fotos" },
+  { key: "gibi.html", label: "Gibi do Guigo" },
   { key: "docinhos.html", label: "Docinhos" },
   { key: "solteiros.html", label: "Elenco da Festa" },
   { key: "mural.html", label: "Mural" },
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   embaralharSolteiros();
   configurarPlantaBaixa();
   configurarMapTooltips();
+  configurarGibi();
   configurarAnimacoesScroll();
 });
 
@@ -284,6 +286,47 @@ function configurarPlantaBaixa() {
   viewer.addEventListener("dblclick", () => {
     ajustarZoom(escala > ZOOM_MIN ? ZOOM_MIN - escala : ZOOM_PASSO * 2);
   });
+}
+
+// ---------- Gibi do Guigo: páginas em sequência com efeito de virar ----------
+function configurarGibi() {
+  const viewer = document.getElementById("gibi-viewer");
+  const imagem = document.getElementById("gibi-imagem");
+  const contador = document.getElementById("gibi-counter");
+  const btnAnterior = document.getElementById("gibi-prev");
+  const btnProximo = document.getElementById("gibi-next");
+  if (!viewer || !imagem || !contador || !btnAnterior || !btnProximo) return;
+
+  const totalPaginas = 7;
+  let paginaAtual = 1;
+
+  function atualizarPagina() {
+    imagem.src = "assets/gibi/" + paginaAtual + ".png";
+    imagem.alt = "Página " + paginaAtual + " do gibi";
+    contador.textContent = paginaAtual + " / " + totalPaginas;
+    btnAnterior.disabled = paginaAtual === 1;
+    btnProximo.disabled = paginaAtual === totalPaginas;
+    viewer.classList.remove("is-turning");
+    void viewer.offsetWidth;
+    viewer.classList.add("is-turning");
+  }
+
+  function irPara(delta) {
+    const proxima = Math.min(totalPaginas, Math.max(1, paginaAtual + delta));
+    if (proxima === paginaAtual) return;
+    paginaAtual = proxima;
+    atualizarPagina();
+  }
+
+  btnAnterior.addEventListener("click", () => irPara(-1));
+  btnProximo.addEventListener("click", () => irPara(1));
+
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key === "ArrowLeft") irPara(-1);
+    if (evento.key === "ArrowRight") irPara(1);
+  });
+
+  atualizarPagina();
 }
 
 // ---------- Mapa da festa: tooltips dos marcadores ----------

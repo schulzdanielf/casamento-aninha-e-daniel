@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gibi do Guigo | Ana Carolina &amp; Daniel</title>
+  <meta name="description" content="Uma experiência de gibi criada pelo Guigo, um dos pajens do casamento." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Petit+Formal+Script&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">A &amp; D</a>
+      <button class="nav-toggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="cronograma.html">Cronograma</a></li>
+        <li><a href="cardapio.html">Cardápio</a></li>
+        <li><a href="drinks.html">Bebidas</a></li>
+        <li><a href="album.html">Álbum Colaborativo</a></li>
+        <li><a href="gibi.html" class="active">Gibi do Guigo</a></li>
+        <li><a href="docinhos.html">Docinhos</a></li>
+        <li><a href="mural.html">Mural de Recados</a></li>
+        <li><a href="solteiros.html">Elenco da Festa</a></li>
+        <li><a href="mapa.html">Mapa da Festa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 class="section-title">Gibi do Guigo</h1>
+        <p class="section-subtitle">
+          Uma história em páginas, criada pelo Guigo, para você viver uma página por vez.
+        </p>
+
+        <div class="gibi-shell reveal">
+          <div class="gibi-viewer" id="gibi-viewer">
+            <img id="gibi-imagem" src="assets/gibi/1.png" alt="Página 1 do gibi" />
+          </div>
+          <div class="gibi-controls">
+            <button type="button" id="gibi-prev" aria-label="Página anterior">← Anterior</button>
+            <span id="gibi-counter">1 / 7</span>
+            <button type="button" id="gibi-next" aria-label="Próxima página">Próxima →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Com amor, <span class="heart">♥</span> Ana Carolina &amp; Daniel · <span data-ano-atual>2026</span></p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
