@@ -459,6 +459,104 @@ img {
   font-style: italic;
 }
 
+.bar-parceiro {
+  max-width: 760px;
+  margin: 1.4rem auto 2rem;
+  padding: 1rem 1.1rem 1.15rem;
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio-card);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.4)),
+    var(--cor-bg-alt);
+  box-shadow: var(--sombra);
+  text-align: center;
+}
+
+.bar-parceiro-titulo {
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  margin-bottom: 0.4rem;
+}
+
+.bar-parceiro-brand {
+  display: grid;
+  grid-template-columns: minmax(140px, 210px) minmax(200px, 1fr);
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.65rem;
+}
+
+.bar-parceiro-logo,
+.bar-parceiro-marca {
+  width: 100%;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--cor-linha);
+  background: var(--cor-branco);
+}
+
+.bar-parceiro-kicker {
+  text-transform: uppercase;
+  letter-spacing: 1.9px;
+  color: var(--cor-terracota);
+  font-size: 0.68rem;
+  margin-bottom: 0.3rem;
+}
+
+.bar-parceiro-texto {
+  max-width: 62ch;
+  margin: 0 auto;
+  color: var(--cor-texto-claro);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.drinks-grupo {
+  margin-top: 2.2rem;
+}
+
+.drinks-grupo:first-of-type {
+  margin-top: 0;
+}
+
+.drinks-grupo-titulo {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.95rem;
+  margin-bottom: 1.05rem;
+  color: var(--cor-verde-escuro);
+  text-align: left;
+  border-bottom: 1px solid var(--cor-linha);
+  padding-bottom: 0.55rem;
+}
+
+@media (max-width: 700px) {
+  .bar-parceiro {
+    margin-top: 1rem;
+    padding: 0.95rem;
+  }
+
+  .bar-parceiro-brand {
+    grid-template-columns: 1fr;
+  }
+
+  .bar-parceiro-logo,
+  .bar-parceiro-marca {
+    height: 100px;
+  }
+
+  .drinks-grupo {
+    margin-top: 1.7rem;
+  }
+
+  .drinks-grupo-titulo {
+    text-align: center;
+    font-size: 0.86rem;
+    letter-spacing: 1.5px;
+  }
+}
+
 /* ---------- Álbum colaborativo ---------- */
 .album-box {
   text-align: center;
@@ -696,7 +794,7 @@ img {
   overflow: hidden;
   background: var(--cor-bg-alt);
   cursor: default;
-  touch-action: manipulation;
+  touch-action: none;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -710,13 +808,12 @@ img {
 }
 
 .planta-viewer-track {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform-origin: center center;
+  transform-origin: 0 0;
   transition: transform 0.15s ease-out;
   will-change: transform;
 }

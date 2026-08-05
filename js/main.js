@@ -213,8 +213,6 @@ function configurarPlantaBaixa() {
   let pinchAtivo = false;
   let distanciaInicialPinch = 0;
   let escalaInicialPinch = 1;
-  let posXInicialPinch = 0;
-  let posYInicialPinch = 0;
   let referenciaPinchX = 0;
   let referenciaPinchY = 0;
 
@@ -309,6 +307,14 @@ function configurarPlantaBaixa() {
     track.style.transform = "translate(" + posX + "px, " + posY + "px) scale(" + escala + ")";
   }
 
+  function pontoLocalNoViewer(clientX, clientY) {
+    const rect = viewer.getBoundingClientRect();
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top,
+    };
+  }
+
   function distanciaEntreToques(toqueA, toqueB) {
     return Math.hypot(toqueA.clientX - toqueB.clientX, toqueA.clientY - toqueB.clientY);
   }
@@ -339,28 +345,17 @@ function configurarPlantaBaixa() {
   }
 
   function limitarPosicao() {
-    // Evita arrastar a imagem para muito longe da área visível
-    const limiteX = viewer.clientWidth * (escala - 1) + viewer.clientWidth * 0.5;
-    const limiteY = viewer.clientHeight * (escala - 1) + viewer.clientHeight * 0.5;
-    posX = Math.max(-limiteX, Math.min(limiteX, posX));
-    posY = Math.max(-limiteY, Math.min(limiteY, posY));
+    // Mantém a imagem cobrindo o viewer sem deixar "áreas vazias".
+    const minX = viewer.clientWidth * (1 - escala);
+    const minY = viewer.clientHeight * (1 - escala);
+    posX = Math.max(minX, Math.min(0, posX));
+    posY = Math.max(minY, Math.min(0, posY));
   }
 
-  function ajustarZoom(delta) {
-    const anterior = escala;
-    escala = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, escala + delta));
-    if (escala === ZOOM_MIN) {
-      posX = 0;
-      posY = 0;
-    } else {
-      // Compensa a posição para o zoom parecer centralizado
-      const fator = escala / anterior;
-      posX *= fator;
-      posY *= fator;
-      limitarPosicao();
-    }
-    viewer.classList.toggle("pode-arrastar", escala > ZOOM_MIN);
-    aplicarTransformacao();
+  function ajustarZoom(delta, referenciaX, referenciaY) {
+    const pontoX = typeof referenciaX === "number" ? referenciaX : viewer.clientWidth / 2;
+    const pontoY = typeof referenciaY === "number" ? referenciaY : viewer.clientHeight / 2;
+    atualizarZoomComReferencia(escala + delta, pontoX, pontoY);
   }
 
   function iniciarPinch(toqueA, toqueB) {
@@ -372,12 +367,11 @@ function configurarPlantaBaixa() {
     pinchAtivo = true;
     distanciaInicialPinch = distanciaEntreToques(toqueA, toqueB);
     escalaInicialPinch = escala;
-    posXInicialPinch = posX;
-    posYInicialPinch = posY;
 
     const centro = centroEntreToques(toqueA, toqueB);
-    referenciaPinchX = centro.x;
-    referenciaPinchY = centro.y;
+    const pontoLocal = pontoLocalNoViewer(centro.x, centro.y);
+    referenciaPinchX = pontoLocal.x;
+    referenciaPinchY = pontoLocal.y;
   }
 
   function atualizarPinch(toqueA, toqueB) {
@@ -440,7 +434,6 @@ function configurarPlantaBaixa() {
   }
 
   viewer.addEventListener("pointerup", pararArraste);
-  viewer.addEventListener("pointerleave", pararArraste);
   viewer.addEventListener("pointercancel", pararArraste);
 
   viewer.addEventListener(
@@ -512,7 +505,8 @@ function configurarPlantaBaixa() {
     "wheel",
     (evento) => {
       evento.preventDefault();
-      ajustarZoom(evento.deltaY < 0 ? ZOOM_PASSO : -ZOOM_PASSO);
+      const pontoLocal = pontoLocalNoViewer(evento.clientX, evento.clientY);
+      ajustarZoom(evento.deltaY < 0 ? ZOOM_PASSO : -ZOOM_PASSO, pontoLocal.x, pontoLocal.y);
     },
     { passive: false }
   );
@@ -534,8 +528,9 @@ function configurarPlantaBaixa() {
     });
 
   // Duplo clique/toque para dar um zoom rápido
-  viewer.addEventListener("dblclick", () => {
-    ajustarZoom(escala > ZOOM_MIN ? ZOOM_MIN - escala : ZOOM_PASSO * 2);
+  viewer.addEventListener("dblclick", (evento) => {
+    const pontoLocal = pontoLocalNoViewer(evento.clientX, evento.clientY);
+    ajustarZoom(escala > ZOOM_MIN ? ZOOM_MIN - escala : ZOOM_PASSO * 2, pontoLocal.x, pontoLocal.y);
   });
 
   configurarEdicaoMarcadores();
