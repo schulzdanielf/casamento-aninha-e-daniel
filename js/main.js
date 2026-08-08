@@ -26,7 +26,7 @@ const SURPRESAS = [
   {
     hora: new Date("2026-08-08T21:00:00-03:00"),
     titulo: "Surpresa da Noite",
-    desc: "A partir das 21h, a festa ganha dois momentos especiais: o whisky do noivo, com um Royal Salute no Whisky do noivo, e a tradicional passagem do buquê por volta das 21h30 para quem estiver pronta para celebrar com a gente.",
+    desc: "A partir das 21h, a festa ganha dois momentos especiais: um Royal Salute no whisky do noivo e a tradicional passagem do buquê por volta das 21h30 para quem estiver pronta para celebrar com a gente.",
   },
 ];
 
@@ -193,7 +193,7 @@ function configurarSurpresa() {
       minute: "2-digit",
       hour12: false,
     }).format(proxima.hora);
-    if (desc) desc.textContent = "Disponível a partir das " + brasila + " (horário de Brasília)";
+    if (desc) desc.textContent = "Disponível a partir das " + brasila;
     if (arrow) arrow.textContent = "";
   }
 
