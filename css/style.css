@@ -1440,6 +1440,85 @@ img {
   color: var(--cor-branco);
 }
 
+/* ---------- Modal da surpresa ---------- */
+body.modal-open {
+  overflow: hidden;
+}
+
+.surpresa-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.surpresa-modal.is-open {
+  display: flex;
+}
+
+.surpresa-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 20, 18, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.surpresa-modal__content {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 560px);
+  background: linear-gradient(135deg, #ffffff 0%, #f8efe6 100%);
+  border: 1px solid var(--cor-terracota);
+  border-radius: 24px;
+  box-shadow: var(--sombra);
+  padding: 2rem 1.75rem 1.75rem;
+  text-align: center;
+}
+
+.surpresa-modal__close {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  border: 0;
+  background: transparent;
+  color: var(--cor-texto);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.surpresa-modal__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cor-terracota);
+}
+
+.surpresa-modal__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  color: var(--cor-terracota);
+}
+
+.surpresa-modal__text {
+  margin: 0 auto 0.75rem;
+  max-width: 420px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--cor-texto);
+}
+
+.surpresa-modal__subtext {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--cor-texto-claro);
+}
+
 /* ---------- Docinhos ---------- */
 .docinhos-box {
   max-width: 640px;

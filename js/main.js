@@ -24,14 +24,9 @@ const STORAGE_KEY = "experiencia-visitadas";
 // Quando mais de um já estiver liberado, mostra sempre o mais recente.
 const SURPRESAS = [
   {
-    hora: new Date("2026-08-08T22:00:00-03:00"),
-    titulo: "Hora do Whisky",
-    desc: "Passe no bar: o whisky especial dos noivos está liberado!",
-  },
-  {
-    hora: new Date("2026-08-08T23:30:00-03:00"),
-    titulo: "Hora do Buquê",
-    desc: "Solteiras, se aproximem da pista! Está quase na hora do buquê.",
+    hora: new Date("2026-08-08T21:00:00-03:00"),
+    titulo: "Surpresa da Noite",
+    desc: "A partir das 21h, a festa ganha dois momentos especiais: o whisky do noivo, com um Royal Salute no Whisky do noivo, e a tradicional passagem do buquê por volta das 21h30 para quem estiver pronta para celebrar com a gente.",
   },
 ];
 
@@ -139,15 +134,34 @@ function renderProgresso() {
 }
 
 // ---------- Card surpresa ----------
+function obterAgoraParaSurpresa() {
+  const params = new URLSearchParams(window.location.search);
+  const modoTeste = params.get("teste-surpresa") === "1";
+
+  if (modoTeste) {
+    return new Date("2026-08-08T21:00:00-03:00");
+  }
+
+  return new Date();
+}
+
+function obterSurpresaAtual(agora = obterAgoraParaSurpresa()) {
+  const desbloqueadas = SURPRESAS.filter((s) => agora >= s.hora);
+  return desbloqueadas.length > 0 ? desbloqueadas[desbloqueadas.length - 1] : SURPRESAS[0];
+}
+
 function configurarSurpresa() {
   const card = document.getElementById("surpresa-card");
+  const modal = document.getElementById("surpresa-modal");
+  const modalTitle = document.getElementById("surpresa-modal-title");
+  const modalText = document.getElementById("surpresa-modal-text");
+  const modalSubtext = document.getElementById("surpresa-modal-subtext");
   if (!card) return;
 
   const desc = document.getElementById("surpresa-desc");
   const arrow = document.getElementById("surpresa-arrow");
   const titulo = card.querySelector(".xp-title");
-  const agora = new Date();
-
+  const agora = obterAgoraParaSurpresa();
   const desbloqueadas = SURPRESAS.filter((s) => agora >= s.hora);
 
   if (desbloqueadas.length > 0) {
@@ -156,14 +170,49 @@ function configurarSurpresa() {
     card.classList.add("is-unlocked");
     if (titulo) titulo.textContent = atual.titulo;
     if (desc) desc.textContent = atual.desc;
-    if (arrow) arrow.textContent = "";
+    if (arrow) arrow.textContent = "Abrir";
+
+    if (modal && modalTitle && modalText && modalSubtext) {
+      modalTitle.textContent = atual.titulo;
+      modalText.textContent = atual.desc;
+      modalSubtext.textContent = "Atenção: este conteúdo é exibido em horário de Brasília.";
+    }
+
+    card.addEventListener("click", () => {
+      if (!modal) return;
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    });
   } else {
-    // Mostra o horário da próxima surpresa a ser liberada
+    // Mostra o horário da próxima surpresa a ser liberada em Brasília.
     const proxima = SURPRESAS[0];
-    const hh = String(proxima.hora.getHours()).padStart(2, "0");
-    const mm = String(proxima.hora.getMinutes()).padStart(2, "0");
-    if (desc) desc.textContent = "Disponível a partir das " + hh + "h" + mm;
+    const brasila = new Intl.DateTimeFormat("pt-BR", {
+      timeZone: "America/Sao_Paulo",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).format(proxima.hora);
+    if (desc) desc.textContent = "Disponível a partir das " + brasila + " (horário de Brasília)";
+    if (arrow) arrow.textContent = "";
   }
+
+  document.querySelectorAll("[data-close-surpresa]").forEach((el) => {
+    el.addEventListener("click", () => {
+      if (!modal) return;
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal) {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+  });
 }
 
 // ---------- Jornal dos Solteiros: ordem embaralhada a cada visita ----------
